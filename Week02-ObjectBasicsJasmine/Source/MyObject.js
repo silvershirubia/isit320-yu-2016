@@ -1,9 +1,8 @@
 var myObject = {
-	num : 80,
-	'strings': 'sdkfj',
+
 	getOne: function() {
         'use strict';
-        return 1;
+        var here = 3;
     },
     getTwo: function() {
         'use strict';
@@ -12,9 +11,11 @@ var myObject = {
     getThree: function() {
         'use strict';
         return 3;
-    }
-	
+    },
+    num1: 80,
+    num2: 80,
+    string: 'string'
 	
 };
 
-exports.myObject;
+module.exports.myObject;
