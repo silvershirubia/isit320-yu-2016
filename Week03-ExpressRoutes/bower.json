@@ -1,0 +1,20 @@
+{
+  "name": "Week03-ExpressRoutes",
+  "description": "",
+  "main": "",
+  "authors": [
+    "school <school>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/silvershirubia/isit320-yu-2016",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
