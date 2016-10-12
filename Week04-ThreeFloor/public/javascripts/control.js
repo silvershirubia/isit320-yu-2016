@@ -18,7 +18,7 @@ define(["Floors"], function(Floors){
 
     var cameraPosition = {
         x : 0,
-        y : 1,
+        y : 2,
         z : 2
     };
 
@@ -131,8 +131,8 @@ define(["Floors"], function(Floors){
 
     function addCubes(scene, camera, wireFrame) {
         for (var i = 0; i < 6; i++) {
-            addCube(scene, camera, false, 1, i);
-            addCube(scene, camera, false, -1, i);
+            addCube(scene, camera, false, 2, i);
+            addCube(scene, camera, false, -2, i);
         }
     }
 
