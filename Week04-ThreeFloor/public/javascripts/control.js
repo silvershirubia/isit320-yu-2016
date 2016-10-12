@@ -6,6 +6,7 @@ define(["Floors"], function(Floors){
     var camera = null;
     var renderer = null;
     var cube = null;
+    var sphere = null;
     var THREE = null;
 
     var keyMove = {
@@ -16,36 +17,46 @@ define(["Floors"], function(Floors){
     };
 
     var cameraPosition = {
-        x : 2,
-        y : 0,
+        x : 0,
+        y : 1,
         z : 2
     };
 
     function Control(threeInit) {
+
         THREE = threeInit;
         console.log("Control called");
         scene = new THREE.Scene();
         var width = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(75, width, 0.1, 1000);
 
-
+        addLights();
         var floor = new Floors(THREE);
         floor.drawFloor(scene);
 
         renderer = new THREE.WebGLRenderer({
             antialias : true
         });
-        renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
-        cube = addCube(scene, camera, false, 1, 1);
+        //cube = addCube(scene, camera, false, 5, 5);
+        cube = addCubes(scene, camera, false);
+        sphere = addSphere(scene, camera, false, 0, -2)
         camera.position.z = 23;
         camera.position.x = 2;
-        camera.position.y = 0;
+        camera.position.y = 1;
 
         document.addEventListener('keydown', onKeyDown, false);
         document.addEventListener('keyup', onKeyUp, false);
+        window.addEventListener('resize', onWindowResize, false);
 
         render();
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     var onKeyDown = function(event) {
@@ -118,12 +129,24 @@ define(["Floors"], function(Floors){
         renderer.render(scene, camera);
     }
 
+    function addCubes(scene, camera, wireFrame) {
+        for (var i = 0; i < 6; i++) {
+            addCube(scene, camera, false, 1, i);
+            addCube(scene, camera, false, -1, i);
+        }
+    }
+
     function addCube(scene, camera, wireFrame, x, y) {
-        var geometry = new THREE.BoxGeometry(7, 7, 7);
-        var material = new THREE.MeshNormalMaterial({
+        var geometry = new THREE.BoxGeometry(1, 1, 1);
+        /*var material = new THREE.MeshNormalMaterial({
             color : 0x00ffff,
             wireframe : wireFrame
+        });*/
+
+        var material = new THREE.MeshLambertMaterial({
+            map : THREE.ImageUtils.loadTexture('images/crate.jpg')
         });
+
         var cube = new THREE.Mesh(geometry, material);
         cube.position.set(x, 0, y);
         scene.add(cube);
@@ -132,6 +155,29 @@ define(["Floors"], function(Floors){
         return cube;
     }
 
+    function addSphere(sne, camera, wireFrame, x, y) {
+        var geometry = new THREE.SphereGeometry(.5, 25, 25);
+        var material = new THREE.MeshNormalMaterial({
+            color: 0x00ffff,
+            wireframe: wireFrame
+        });
+
+        var sphere = new THREE.Mesh(geometry, material);
+        sphere.overdraw = true;
+        sphere.position.set(x, 0, y);
+        scene.add(sphere);
+
+        return sphere;
+    }
+
+    function addLights() {
+        var light = new THREE.DirectionalLight(0xffffff, 1.5);
+        light.position.set(1, 1, 1);
+        scene.add(light);
+        light = new THREE.DirectionalLight(0xffffff, 0.75);
+        light.position.set(-1, -0.5, -1);
+        scene.add(light);
+    }
 
     return Control;
 });

@@ -41,6 +41,7 @@ define(['require'], function() {
             vertexColors: THREE.VertexColors
         });
 
+
         var mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
     }
