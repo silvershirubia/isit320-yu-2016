@@ -2,6 +2,6 @@
   "preset": "google",
   "validateIndentation": 4,
   "excludeFiles": ["**/node_modules/**", "**/components/**", "**/bower-components/**"],
-  "maximumLineLength": 120
+  "maximumLineLength": 200
   //"requireCamelCaseOrUpperCaseIdentifiers": false
 }
