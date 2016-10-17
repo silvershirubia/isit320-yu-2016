@@ -28,14 +28,14 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            src: ['**/*.js', '!spec/bitly-links.js'],
+            src: ['**/*.js', '!spec/bitly-links.js', '**/*app.js'],
             options: {
                 config: '.jscsrc'
             }
         },
 
         'jsbeautifier': {
-            files: ['**/*.js', '!**/node_modules/**', '!**/components/**', '!**/platforms/**'],
+            files: ['**/*.js', '!**/node_modules/**', '!**/components/**', '!**/platforms/**', '**/app.js'],
             options: {
                 'indentSize': 4
             }
