@@ -1,3 +1,6 @@
+/**
+ * Created by bcuser on 9/28/16.
+ */
 module.exports = function(grunt) {
     'use strict';
 
@@ -10,47 +13,33 @@ module.exports = function(grunt) {
 
             options: {
                 ignores: [
-                    '**/node_modules/**'
+                    '**/node_modules/**', '**/components/**'
                 ],
-                reporter: 'checkstyle',
-                reporterOutput: 'result.xml',
+                reporter: require('jshint-stylish'),
                 strict: true,
-                globals: {
-                    describe: true,
-                    afterEach: true,
-                    beforeEach: true,
-                    inject: true,
-                    it: true,
-                    jasmine: true,
-                    expect: true,
-                    module: true,
-                }
+                jasmine: true
             }
         },
 
         clean: {
-            work: {
-                src: ['**/node_modules/**']
-            },
-
-            zip: {
-                src: ['<%= zipFile %>']
+            yourTarget: {
+                src: ['**/node_modules/**', '**/components/**']
             }
         },
 
         jscs: {
-            src: '**/*.js',
+            src: ['**/*.js', '!spec/bitly-links.js'],
             options: {
                 config: '.jscsrc'
             }
         },
 
         'jsbeautifier': {
-            files: ['**/*.js', '!**/node_modules/**', '!**/components/**'],
+            files: ['**/*.js', '!**/node_modules/**', '!**/components/**', '!**/platforms/**'],
             options: {
                 'indentSize': 4
             }
-        }
+        },
 
     });
 

@@ -1,31 +1,26 @@
 {
-  "name": "GetNumbers",
-  "version": "1.0.0",
-  "description": "Downloaded example",
-  "main": "karma.conf.js",
-  "directories": {
-    "test": "test"
-  },
+  "name": "Week02-GruntCheck",
+  "version": "0.0.0",
+  "main": "work.js",
   "scripts": {
+    "start": "nodemon work.js",
     "test": "node jasmine-runner.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/charliecalvert/JsObjects.git"
-  },
-  "author": "CharlieCalvert",
+  "keywords": [
+    "JavaScript",
+    "format"
+  ],
+  "author": "Charlie Calvert",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/charliecalvert/JsObjects/issues"
-  },
-  "homepage": "https://elvenware.com/charlie",
   "devDependencies": {
-    "grunt": "~1.0.1",
-    "grunt-contrib-clean": "~1.0.0",
-    "grunt-contrib-jshint": "~1.0.0",
-    "grunt-jsbeautifier": "^0.2.12",
-    "grunt-jscs": "^2.8.0",
-    "jasmine-core": "^2.4.1",
-    "jasmine-spec-reporter": "^2.4.0"
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsbeautifier": "^0.2.13",
+    "grunt-jscs": "^3.0.1",
+    "grunt-karma": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "jasmine-spec-reporter": "^2.7.0",
+    "jshint-stylish": "^2.2.1"
   }
 }

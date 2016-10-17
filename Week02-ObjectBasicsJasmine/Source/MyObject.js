@@ -1,8 +1,8 @@
 var myObject = {
 
-	getOne: function() {
+    getOne: function() {
         'use strict';
-        var here = 3;
+        return 1;
     },
     getTwo: function() {
         'use strict';
@@ -15,7 +15,6 @@ var myObject = {
     num1: 80,
     num2: 80,
     string: 'string'
-	
-};
 
-module.exports.myObject;
+};
+module.exports = myObject;
