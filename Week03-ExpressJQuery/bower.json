@@ -1,0 +1,25 @@
+{
+  "name": "Week02-GruntCheck",
+  "description": "",
+  "main": "work.js",
+  "authors": [
+    "Sil"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "JavaScript",
+    "format"
+  ],
+  "homepage": "https://github.com/silvershirubia/isit320-yu-2016",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}

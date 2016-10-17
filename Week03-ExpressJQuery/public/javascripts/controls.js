@@ -1,0 +1,49 @@
+/**
+ * Created by bcuser on 10/17/16.
+ */
+var MyObject = (function() {
+
+    // constructor
+    function MyObject() {
+        $('#sendString').click(showString);
+        $('#getItems').click(showItems);
+        $('#getMarie').click(showMarie);
+    }
+
+    function showString() {
+        $('#stringHolder').html('Send string was clicked');
+    }
+
+    function showItems() {
+        $("#myList").append('<li>' + 'item01' + '</li>');
+        $("#myList").append('<li>' + 'item02' + '</li>');
+        $("#myList").append('<li>' + 'item03' + '</li>');
+    }
+
+    function showMarie(){
+        for (var property in marie) {
+            if (marie.hasOwnProperty(property)) {
+                $("#myList").append('<li>' + marie[property] + '</li>');
+            }
+        }
+    }
+
+    var marie = {
+        "firstName": "Marie",
+        "lastName": "Curie",
+        "city": "Paris",
+        "country": "France"
+    };
+
+    MyObject.prototype.readyCalled = function() {
+        $("#readyCalled").html("Ready was called and myObjected created");
+    };
+
+    return MyObject;
+}());
+
+
+$(document).ready(function() {
+    var myObject = new MyObject();
+    myObject.readyCalled();
+});
