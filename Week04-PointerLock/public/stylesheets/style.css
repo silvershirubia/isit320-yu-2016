@@ -53,3 +53,13 @@ body {
   cursor: pointer;
 
 }
+
+#message {
+  /* background-color: #7777AA; */
+  background-color:rgba(0,255,0,0.5);
+  position: absolute;
+  left: 0.5em;
+  width: 250px;
+  font-size: 10px;
+  border: solid black 2px;
+}
