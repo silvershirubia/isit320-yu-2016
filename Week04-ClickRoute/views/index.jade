@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  
+  p Hello from the server
+  p#intro Test
+
+  
+  ul
+    li.listItem Item01
+    li.listItem Item02
+    li.listItem Item03
+
+
+  div.resultsInfo
+      p#result
+      p#route
+      p#message
+
+  h2 Hint
+  
+  p.short.
+    The link below calls the /Item01 route. It shows the result in 
+    a separate page. Obviously this is not the solution I'm looking for 
+    in this assignment, but I want to remind you that you can call 
+    routes by just appending the route to your URL: 
+  
+  a(href='/Item01') http://localhost:30025/Item01
+
+  p.short.
+    To see the object sent back by the Item01 route, you can click 
+    the link above, or you can type in the URL manually. This trick 
+    can help when you want to test your <strong>Item02</strong> and
+    <strong>Item03</strong> routes.

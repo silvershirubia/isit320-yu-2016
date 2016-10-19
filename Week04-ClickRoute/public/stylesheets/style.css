@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.blue {
+  background-color: #00B7FF;
+}
+
+.short {
+  width: 600px;
+}
+
+.resultsInfo {
+  background-color: lightblue;
+}
+
+.pretty{
+  padding: 5px;
+}
