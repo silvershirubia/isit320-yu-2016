@@ -9,7 +9,7 @@ define(['require'], function() {
     var THREE = null;
 
     function Floors(threeInit) {
-    THREE = threeInit;
+        THREE = threeInit;
 
     }
 
@@ -41,7 +41,6 @@ define(['require'], function() {
             vertexColors: THREE.VertexColors
         });
 
-
         var mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
     }
@@ -51,8 +50,10 @@ define(['require'], function() {
         var names = ['images/checkerboard.jpg', 'images/FloorBorder256.png', 'images/WoodenPlanks.png', 'images/grass02.jpg', 'images/Grass03.png'];
         var repeats = [250, 100, 100, 175];
         var index = 0;
-        //var floorTexture = new THREE.ImageUtils.loadTexture('images/FloorBorder256.png');
-        var floorTexture = new THREE.ImageUtils.loadTexture(names[index]);
+
+        var loader = new THREE.TextureLoader();
+        var floorTexture = loader.load(names[index]);
+
         floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
         floorTexture.repeat.set(repeats[index], repeats[index]);
         var floorMaterial = new THREE.MeshBasicMaterial({
