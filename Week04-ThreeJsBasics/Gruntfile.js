@@ -56,7 +56,7 @@ module.exports = function(grunt) {
             fixture: {
                 command: 'sed "/extend/d" views/index.jade > views/fixture.jade'
             }
-        }, 
+        },
 
         karma: {
             karma: {
