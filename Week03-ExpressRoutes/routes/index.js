@@ -13,4 +13,15 @@ router.get('/read', function(request, response) {
   ]);
 });
 
+router.get('/add', function(request, response){
+
+  console.log('add method called');
+  console.log('The parameters are: ', request.query);
+
+  response.send({
+    answer: (parseInt(request.query.operatorA) + parseInt(request.query.operatorB))
+  });
+
+});
+
 module.exports = router;
