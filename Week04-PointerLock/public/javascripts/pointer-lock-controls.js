@@ -2,7 +2,7 @@
  * Created by bcuser on 10/12/16.
  */
 define(['Floors'], function(Floor) {
-
+    'use strict';
     var PointerLockControls = function(camera, threeInit) {
 
         var scope = this;
@@ -140,7 +140,7 @@ define(['Floors'], function(Floor) {
 
                 return v;
 
-            }
+            };
 
         }();
 

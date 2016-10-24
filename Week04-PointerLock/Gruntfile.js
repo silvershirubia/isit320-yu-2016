@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
             options: {
                 ignores: [
-                    '**/node_modules/**', '**/components/**'
+                    '**/node_modules/**', '**/components/**', '**/three.js', '/pointer-lock-controls.js'
                 ],
                 reporter: require('jshint-stylish'),
                 strict: true,

@@ -1,7 +1,7 @@
 /* globals define: true, THREE:true */
 
 define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, PointerLockSetup, PointerLockControls) {
-
+    'use strict';
     var scene = null;
     var camera = null;
     var renderer = null;
