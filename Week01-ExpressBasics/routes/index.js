@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Isit320-Yu' });
+    'use strict';
+    res.render('index', {
+        title: 'Isit320-Yu'
+    });
 });
 
 module.exports = router;

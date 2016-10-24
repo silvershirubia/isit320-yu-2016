@@ -1,6 +1,3 @@
-/**
- * Created by bcuser on 9/28/16.
- */
 module.exports = function(grunt) {
     'use strict';
 
@@ -13,7 +10,7 @@ module.exports = function(grunt) {
 
             options: {
                 ignores: [
-                    '**/node_modules/**', '**/components/**'
+                    '**/node_modules/**', '**/components/**', '**/three.js', '**/pointer-lock-controls.js'
                 ],
                 reporter: require('jshint-stylish'),
                 strict: true,
@@ -28,18 +25,44 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            src: ['**/*.js', '!spec/bitly-links.js'],
+            src: '**/*.js',
             options: {
                 config: '.jscsrc'
             }
         },
 
         'jsbeautifier': {
-            files: ['**/*.js', '!**/node_modules/**', '!**/components/**', '!**/platforms/**'],
+            files: ['**/*.js', '!**/node_modules/**', '!**/components/**'],
             options: {
                 'indentSize': 4
             }
         },
+
+        jade: {
+            compile: {
+                options: {
+                    pretty: true,
+                    data: {
+                        debug: false
+                    }
+                },
+                files: {
+                    'spec/fixtures/fixture.html': ['views/fixture.jade', '$ELF_TEMPLATES/JadeMixins/*.jade']
+                }
+            }
+        },
+
+        shell: {
+            fixture: {
+                command: 'sed "/extend/d" views/index.jade > views/fixture.jade'
+            }
+        },
+
+        karma: {
+            karma: {
+                configFile: 'karma.conf.js'
+            }
+        }
 
     });
 
@@ -47,6 +70,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsbeautifier');
+    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.registerTask('fixture', ['exec:stripExtends', 'jade', 'karma']);
     grunt.registerTask('beautify', ['jsbeautifier']);
     grunt.registerTask('check', ['beautify', 'jscs', 'jshint']);
+    grunt.registerTask('test', ['jshint', 'karma']);
 };
