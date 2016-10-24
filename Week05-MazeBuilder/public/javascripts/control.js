@@ -1,7 +1,7 @@
 /* globals define: true, THREE:true */
 
 define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, PointerLockSetup, PointerLockControls) {
-
+    'use strict';
     var scene = null;
     var camera = null;
     var renderer = null;
@@ -21,8 +21,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
 
     var cameraPosition = {
         x: 0,
-        y: 0,
-        z: 2
+        y: 10,
+        z: 10
     };
 
     function Control(initThree) {
@@ -67,8 +67,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
         var yawObject = controls.getObject();
         scene.add(yawObject);
 
-        yawObject.position.x = size;
-        yawObject.position.z = size;
+        yawObject.position.x = size * 14;
+        yawObject.position.z = size * 14;
 
         var ps = new PointerLockSetup(controls);
     }
@@ -105,16 +105,19 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
     }
 
     function addCubes(scene, camera, wireFrame) {
-        $.getJSON('grid000.json', function (grid) {
-            for(var i = 0; i < grid; i++){
-                console.log(grid[i]);
+
+        $.getJSON('grid000.json', function(grid) {
+            for (var i = 0; i < grid.length; i++) {
+                for (var j = 0; j < grid[i].length; j++) {
+                    if (grid[i][j] === 1) {
+                        addCube(scene, camera, false, i * size, j * size);
+
+                    }
+                }
             }
+
         });
 
-        for (var i = 0; i < 6; i++) {
-            addCube(scene, camera, false, 0, (i * size));
-            addCube(scene, camera, false, size * 2, (i * size));
-        }
         addSphere(scene, camera, wireFrame, size, size * -1);
     }
 
