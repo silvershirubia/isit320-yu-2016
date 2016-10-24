@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "node jasmine-runner.js"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -12,6 +13,14 @@
     "express": "~4.13.4",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsbeautifier": "^0.2.13",
+    "grunt-jscs": "^3.0.1",
+    "grunt-karma": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "jshint-stylish": "^2.2.1"
   }
 }

@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+    'use strict';
     console.log('Document loaded in prog272');
 
     $('#read').click(read);
@@ -15,7 +16,7 @@ $(document).ready(function() {
         $.getJSON('/read', function(result) {
             console.log(result);
             $('#display').html(JSON.stringify(result));
-        })
+        });
     }
 
     function readJson() {
@@ -23,16 +24,19 @@ $(document).ready(function() {
         $.getJSON('names.json', function(result) {
             console.log(result);
             $('#display').html(JSON.stringify(result));
-        })
+        });
     }
 
-    function add(){
+    function add() {
         var operatorA = $('#operatorA').val();
         var operatorB = $('#operatorB').val();
         console.log('operators:', operatorA, operatorB);
-        var requestQuery = { operatorA: operatorA, operatorB: operatorB };
+        var requestQuery = {
+            operatorA: operatorA,
+            operatorB: operatorB
+        };
 
-        $.getJSON('/add', requestQuery, function(result){
+        $.getJSON('/add', requestQuery, function(result) {
             console.log('here');
             $('#display').html(JSON.stringify(result));
         });
