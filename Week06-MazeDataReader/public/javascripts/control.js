@@ -2,14 +2,15 @@
 
 define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, PointerLockSetup, PointerLockControls) {
     'use strict';
-    var scene = null;
+
     var camera = null;
-    var renderer = null;
-    var cubes = [];
-    var size = 20;
-    var sphere = null;
-    var raycaster = null;
     var controls = null;
+    var cubes = [];
+    var npcs = [];
+    var raycaster = null;
+    var renderer = null;
+    var scene = null;
+    var size = 20;
     var THREE = null;
 
     var keyMove = {
@@ -82,6 +83,16 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
     function drawText(position) {
         $('#cameraX').html(position.x);
         $('#cameraZ').html(position.z);
+
+        $('#mazeX').html(Math.abs(Math.round(position.x / size)));
+        $('#mazeZ').html(Math.abs(Math.round(position.z / size)));
+
+        $('#npcs').empty();
+
+        for(var i = 0; i < npcs.length; i++){
+            $('#npcs').append('<li>' + npcs[i] +
+            '</li>');
+        }
     }
 
     function animate() {
@@ -113,6 +124,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] === 1) {
+
                         addCube(scene, camera, false, i * size, -j * size, floorTexture);
 
                     }
@@ -125,6 +137,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] != 0) {
+                        npcs.push([i, j]);
                     addSphere(scene, camera, wireFrame, i*size, -j*size);
                     }
                 }
@@ -132,14 +145,27 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
 
         });
 
+        readDataBase();
+
+    }
+
+    function readDataBase() {
+        $.getJSON('/read?docName=npcsDoc', function(data) {
+            console.log(JSON.stringify(data.docs, null, 4));
+
+        }).fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log({"Request Failed": err});
+            var response = JSON.parse(jqxhr.responseText);
+            var responseValue = JSON.stringify(response, null, 4);
+            console.log(responseValue);
+            alert('Database not connected' + responseValue);
+        });
     }
 
     function addCube(scene, camera, wireFrame, x, z, floorTexture) {
         //var geometry = new THREE.BoxGeometry(1, 1, 1);
         var geometry = new THREE.BoxGeometry(size, size, size);
-
-        //var loader = new THREE.TextureLoader();
-        //var floorTexture = loader.load('images/crate.jpg');
 
         var material = new THREE.MeshLambertMaterial({
             map: floorTexture
