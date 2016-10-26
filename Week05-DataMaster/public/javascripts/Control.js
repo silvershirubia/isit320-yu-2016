@@ -15,7 +15,7 @@ var queryController = myModule.controller('QueryController',
             $scope.result = result;
         }
 
-        $scope.docs = result.docs;
+        $scope.docs = JSON.stringify(result.docs);
     });
 
 function runQuery(query, $q) {
@@ -44,14 +44,14 @@ queryController.create = function($q) {
     return runQuery('/createDb', $q);
 };
 
-queryController.statesBulk = function($q) {
+queryController.npcsBulk = function($q) {
     'use strict';
-    return runQuery('/insertBulk?fileName=States.json', $q);
+    return runQuery('/insertBulk?fileName=Npcs.json', $q);
 };
 
-queryController.statesOneDoc = function($q) {
+queryController.npcsOneDoc = function($q) {
     'use strict';
-    return runQuery('/insertFile?fileName=States.json&id=oneDoc', $q);
+    return runQuery('/insertFile?fileName=Npcs.json&id=oneDoc', $q);
 };
 
 queryController.design = function($q) {
@@ -61,22 +61,22 @@ queryController.design = function($q) {
 
 queryController.viewBulk = function($q) {
     'use strict';
-    return runQuery('/viewBulk?designDoc=states&view=docBulk', $q);
+    return runQuery('/viewBulk?designDoc=npcs&view=docBulk', $q);
 };
 
 queryController.readOne = function($q) {
     'use strict';
-    return runQuery('/read?docName=statesDoc', $q);
+    return runQuery('/read?docName=npcObjects', $q);
 };
 
 queryController.viewOneDoc = function($q) {
     'use strict';
-    return runQuery('/viewOneDoc?designDoc=states&view=docStatesDoc', $q);
+    return runQuery('/viewOneDoc?designDoc=npcs&view=docNpcsDoc', $q);
 };
 
 queryController.viewBulkAngular = function($q) {
     'use strict';
-    return runQuery('/viewStateCapitalAngular?designDoc=states&view=docStateCapital', $q);
+    return runQuery('/viewNpcSecurityAngular?designDoc=npcs&view=docNpcSecurity', $q);
 };
 
 var nameController = myModule.controller('NameController', function($scope, databaseName, allDbs) {
@@ -116,17 +116,17 @@ myModule.config(function($routeProvider) {
         resolve: {
             result: queryController.create
         }
-    }).when('/insertStatesBulk', {
+    }).when('/insertNpcsBulk', {
         templateUrl: 'templates/States.html',
         controller: 'QueryController',
         resolve: {
-            result: queryController.statesBulk
+            result: queryController.npcsBulk
         }
-    }).when('/insertStatesOneDoc', {
+    }).when('/insertNpcsOneDoc', {
         templateUrl: 'templates/States.html',
         controller: 'QueryController',
         resolve: {
-            result: queryController.statesOneDoc
+            result: queryController.npcsOneDoc
         }
     }).when('/insertDesignDoc', {
         templateUrl: 'templates/QueryView.html',
@@ -152,7 +152,7 @@ myModule.config(function($routeProvider) {
         resolve: {
             result: queryController.viewOneDoc
         }
-    }).when('/viewBulkStatesCapital', {
+    }).when('/viewBulkNpcSecurity', {
         templateUrl: 'templates/QueryView.html',
         controller: 'QueryController',
         resolve: {

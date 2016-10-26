@@ -35,8 +35,8 @@ function views(router, nano, dbName) {
     /**
      * @memberOf CouchViews
      */
-    router.get('/viewStateCapitalTemplate', function(request, response) {
-        console.log('viewStateCapital Called: ' + request.query);
+    router.get('/viewNpcSecurityTemplate', function(request, response) {
+        console.log('viewNpcSecurity Called: ' + request.query);
         runTemplateView('Templates/StateCapital.html', request, response);
     });
 
@@ -53,8 +53,8 @@ function views(router, nano, dbName) {
         });
     });
 
-    router.get('/viewStateCapitalAngular', function(request, response) {
-        console.log('viewStateCapitalAngular called.');
+    router.get('/viewNpcSecurityAngular', function(request, response) {
+        console.log('viewNpcSecurityAngular called.');
         var doc = request.query.designDoc;
         var view = request.query.view;
         var nanoDb = nano.db.use(dbName);

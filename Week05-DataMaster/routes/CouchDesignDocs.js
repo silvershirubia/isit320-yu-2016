@@ -25,26 +25,29 @@ function designDocs(router, nano, dbName) {
     };
 
     var docBulk = function(doc) {
-        emit(doc._id, doc.name);
+        emit(doc._id, doc.npc_name);
     };
 
-    var docStateCapital = function(doc) {
-        emit(doc.abbreviation, {
-            'name': doc.name,
-            'capital': doc.capital
+    var docNpcSecurity = function(doc) {
+        emit(doc.id, {
+            'npc_id': doc.npc_id,
+            'npc_name': doc.npc_name,
+            'question': doc.question,
+            'answer': doc.answer
         });
     };
 
-    var docStatesDoc = function(doc) {
-        if (doc._id === 'statesDoc') {
+    var docNpcsDoc = function(doc) {
+        if (doc._id === 'npcObjects') {
             var data = [];
-            doc.docs.forEach(function(state) {
+            doc.docs.forEach(function(npc) {
                 data.push({
-                    'name': state.name,
-                    'capital': state.capital
+                    'npc_id': npc.npc_id,
+                    'npc_name': npc.npc_name,
+                    'value': npc.value
                 });
             });
-            emit(doc.docs[0].abbreviation, data);
+            emit(doc.docs[0].id, data);
         }
     };
 
@@ -98,7 +101,7 @@ function designDocs(router, nano, dbName) {
 
         console.log('Design Doc Called');
 
-        var designName = '_design/states';
+        var designName = '_design/npcs';
         var designDocument = {
             'views': {
                 'docBulk': {
@@ -107,11 +110,11 @@ function designDocs(router, nano, dbName) {
                 'docIdDoc': {
                     'map': docIdDoc
                 },
-                'docStateCapital': {
-                    'map': docStateCapital
+                'docNpcSecurity': {
+                    'map': docNpcSecurity
                 },
-                'docStatesDoc': {
-                    'map': docStatesDoc
+                'docNpcsDoc': {
+                    'map': docNpcsDoc
                 }
                 /*,
                                 "viewStatesDoc" : {
