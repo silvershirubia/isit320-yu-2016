@@ -158,8 +158,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         $.getJSON('/read?docName=npcObjects', function(data) {
             console.log(JSON.stringify(data.docs, null, 4));
 
-
-
         }).fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ', ' + error;
             console.log({
