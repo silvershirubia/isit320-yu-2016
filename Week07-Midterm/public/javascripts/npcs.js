@@ -1,7 +1,7 @@
 /**
  * Created by bcuser on 10/26/16.
  */
-define(function () {
+define(function() {
     'use strict';
 
     var baseName = 'npc';
@@ -24,8 +24,6 @@ define(function () {
 
         return sphere;
     };
-
-
 
     function getName(baseName, x, z) {
         return baseName + '_' + x + '_' + z;

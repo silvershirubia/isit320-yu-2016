@@ -1,7 +1,7 @@
 /**
  * Created by bcuser on 10/26/16.
  */
-define(function () {
+define(function() {
     'use strict';
     var THREE;
 
