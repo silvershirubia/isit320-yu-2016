@@ -7,6 +7,9 @@ define(function() {
     var baseName = 'npc';
     var THREE;
 
+    Npcs.prototype.npcList = [];
+    Npcs.prototype.npcCoordinates = [];
+
     function Npcs(threeInit) {
         THREE = threeInit;
     }
@@ -20,6 +23,9 @@ define(function() {
         var sphere = new THREE.Mesh(geometry, material);
         sphere.overdraw = true;
         sphere.position.set(x, size / 2, z);
+
+        sphere.name = getName(baseName, x, z);
+
         scene.add(sphere);
 
         return sphere;
@@ -28,6 +34,16 @@ define(function() {
     function getName(baseName, x, z) {
         return baseName + '_' + x + '_' + z;
     }
+
+    Npcs.prototype.removeNpc = function(x, z, scene, gridNpc) {
+        gridNpc[x][z] = 0;
+        var objectName = getName(baseName, x, z);
+        var selectedObject = scene.getObjectByName(objectName);
+        var index = this.npcList.indexOf(selectedObject);
+        this.npcList.splice(index, 1);
+        scene.remove(selectedObject);
+    };
+
 
     return Npcs;
 });

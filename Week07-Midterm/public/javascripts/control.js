@@ -7,8 +7,10 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
     var collisions;
     var controls = null;
     var cubes = [];
+    var foundNpc = false;
+    var mainCharacter;
     var npc;
-    var npcList = [];
+    //var npcList = [];
     var raycaster = null;
     var renderer = null;
     var scene = null;
@@ -51,8 +53,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var floor = new Floor(THREE);
         floor.drawFloor(scene);
-        collisions = new Collisions(THREE);
+
         npc = new Npcs(THREE);
+        collisions = new Collisions(THREE, size);
 
         raycaster = new THREE.Raycaster(new THREE.Vector3(),
             new THREE.Vector3(0, -1, 0), 0, 10);
@@ -93,10 +96,11 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         $('#npcs').empty();
 
-        for (var i = 0; i < npcList.length; i++) {
-            $('#npcs').append('<li>' + npcList[i] +
+        for (var i = 0; i < npc.npcList.length; i++) {
+            $('#npcs').append('<li>' + npc.npcList[i] +
                 '</li>');
         }
+        $('#test').html('foundNpc = ' + foundNpc.valueOf());
     }
 
     function animate() {
@@ -109,11 +113,20 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var controlObject = controls.getObject();
         var position = controlObject.position;
+        var x = Math.abs(Math.round(position.x / size));
+        var z = Math.abs(Math.round(position.z / size));
 
         // drawText(controlObject, position);
         drawText(position);
         collisions.collisionDetection(controls, cubes, raycaster);
+        //mainCharacter = mainCharacter[x][z];
 
+        foundNpc = collisions.npcDetection(position);
+
+        if(foundNpc){
+            var gridNpc = npc.npcList[x][z];
+            npc.removeNpc(x,z,scene,gridNpc);
+        }
         // Move the camera
         controls.update();
 
@@ -141,8 +154,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         $.getJSON('npcs000.json', function(grid) {
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
-                    if (grid[i][j] != 0) {
-                        npcList.push([i, j]);
+                    if (grid[i][j] !== 0) {
+                        npc.npcList.push([i, j]);
                         npc.createNpc(scene, camera, wireFrame, i * size, -j * size, size);
                     }
                 }

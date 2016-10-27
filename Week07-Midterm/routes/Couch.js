@@ -8,7 +8,7 @@ var router = express.Router();
 var fs = require('fs');
 
 var servers = ['http://192.168.0.17:5984', 'http://168.156.47.131:5984'];
-var serverIndex = 1;
+var serverIndex =1;
 var nano = require('nano')(servers[serverIndex]);
 
 var dbName = 'game_data_yu';

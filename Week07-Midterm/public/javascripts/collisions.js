@@ -1,12 +1,16 @@
 /**
  * Created by bcuser on 10/26/16.
  */
-define(function() {
+define(['Npcs'],function(Npcs) {
     'use strict';
+    var npcList = [];
+    var size;
     var THREE;
 
-    function Collisions(threeInit) {
+    function Collisions(threeInit, iSize) {
         THREE = threeInit;
+        size = iSize;
+
     }
 
     Collisions.prototype.collisionDetection = function(controls, cubes, raycaster) {
@@ -53,6 +57,18 @@ define(function() {
 
         return false;
     };
+
+    Collisions.prototype.npcDetection = function(position){
+
+        for(var i = 0; i < npcList.length; i++){
+                if(npcList.indexOf(position)){
+                    return true;
+                    console.log('TRUUUUUUUUUUUUUUUUE');
+                }
+
+        }
+        return false;
+    }
 
     return Collisions;
 });
