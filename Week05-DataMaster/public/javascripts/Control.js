@@ -15,7 +15,7 @@ var queryController = myModule.controller('QueryController',
             $scope.result = result;
         }
 
-        $scope.docs = JSON.stringify(result.docs);
+        $scope.docs = result.docs;
     });
 
 function runQuery(query, $q) {
