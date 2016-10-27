@@ -5,7 +5,7 @@
 var myModule = angular.module('myModule', ['ngRoute']);
 
 var queryController = myModule.controller('QueryController',
-    function($scope, result) {// change this for diff view of states
+    function($scope, result) { // change this for diff view of states
         'use strict';
         if (result.ok) {
             $scope.result = 'It worked';

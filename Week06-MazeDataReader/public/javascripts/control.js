@@ -89,9 +89,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
 
         $('#npcs').empty();
 
-        for(var i = 0; i < npcs.length; i++){
+        for (var i = 0; i < npcs.length; i++) {
             $('#npcs').append('<li>' + npcs[i] +
-            '</li>');
+                '</li>');
         }
     }
 
@@ -136,9 +136,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
         $.getJSON('npcs000.json', function(grid) {
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
-                    if (grid[i][j] != 0) {
+                    if (grid[i][j] !== 0) {
                         npcs.push([i, j]);
-                    addSphere(scene, camera, wireFrame, i*size, -j*size);
+                        addSphere(scene, camera, wireFrame, i * size, -j * size);
                     }
                 }
             }
@@ -153,9 +153,11 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
         $.getJSON('/read?docName=npcsDoc', function(data) {
             console.log(JSON.stringify(data.docs, null, 4));
 
-        }).fail(function (jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error;
-            console.log({"Request Failed": err});
+        }).fail(function(jqxhr, textStatus, error) {
+            var err = textStatus + ', ' + error;
+            console.log({
+                'Request Failed': err
+            });
             var response = JSON.parse(jqxhr.responseText);
             var responseValue = JSON.stringify(response, null, 4);
             console.log(responseValue);
