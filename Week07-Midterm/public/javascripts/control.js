@@ -1,6 +1,6 @@
 /* globals define: true, THREE:true */
 
-define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Npcs) {
+define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Npcs, Score) {
     'use strict';
 
     var camera = null;
@@ -8,7 +8,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
     var controls = null;
     var cubes = [];
     var foundNpc = false;
-    var mainCharacter;
+    var gridX;
+    var gridZ;
     var npc;
     //var npcList = [];
     var raycaster = null;
@@ -91,8 +92,11 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         $('#cameraX').html(position.x);
         $('#cameraZ').html(position.z);
 
-        $('#mazeX').html(Math.abs(Math.round(position.x / size)));
-        $('#mazeZ').html(Math.abs(Math.round(position.z / size)));
+        gridX = Math.abs(Math.round(position.x / size));
+        gridZ = Math.abs(Math.round(position.z / size));
+
+        $('#mazeX').html(gridX);
+        $('#mazeZ').html(gridZ);
 
         $('#npcs').empty();
 
@@ -113,19 +117,17 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var controlObject = controls.getObject();
         var position = controlObject.position;
-        var x = Math.abs(Math.round(position.x / size));
-        var z = Math.abs(Math.round(position.z / size));
 
         // drawText(controlObject, position);
         drawText(position);
         collisions.collisionDetection(controls, cubes, raycaster);
         //mainCharacter = mainCharacter[x][z];
 
-        foundNpc = collisions.npcDetection(position);
+        foundNpc = collisions.npcDetection(gridX, gridZ);
 
         if(foundNpc){
-            var gridNpc = npc.npcList[x][z];
-            npc.removeNpc(x,z,scene,gridNpc);
+            var gridNpc = npc.npcList[gridX][gridZ];
+            npc.removeNpc(gridX,gridZ,scene,gridNpc);
         }
         // Move the camera
         controls.update();
@@ -169,6 +171,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
     function readDataBase() {
         $.getJSON('/read?docName=npcObjects', function(data) {
+            Score.npcData = data.docs;
             console.log(JSON.stringify(data.docs, null, 4));
 
         }).fail(function(jqxhr, textStatus, error) {

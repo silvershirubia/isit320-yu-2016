@@ -58,7 +58,7 @@ define(['Npcs'],function(Npcs) {
         return false;
     };
 
-    Collisions.prototype.npcDetection = function(position){
+    Collisions.prototype.npcDetection = function(x, z){
 
         for(var i = 0; i < npcList.length; i++){
             if(x === npcList[i][0] && z === npcList[i][1]){
