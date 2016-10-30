@@ -1,6 +1,6 @@
 /* globals define: true, THREE:true */
 
-define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, PointerLockSetup, PointerLockControls) {
+define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Score) {
     'use strict';
 
     var camera = null;
@@ -12,6 +12,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
     var scene = null;
     var size = 20;
     var THREE = null;
+    var x;
+    var z;
 
     var keyMove = {
         moveForward: false,
@@ -84,8 +86,11 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
         $('#cameraX').html(position.x);
         $('#cameraZ').html(position.z);
 
-        $('#mazeX').html(Math.abs(Math.round(position.x / size)));
-        $('#mazeZ').html(Math.abs(Math.round(position.z / size)));
+        x = Math.abs(Math.round(position.x / size));
+        z = Math.abs(Math.round(position.z / size));
+
+        $('#mazeX').html(x);
+        $('#mazeZ').html(z);
 
         $('#npcs').empty();
 
@@ -111,8 +116,21 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
 
         // Move the camera
         controls.update();
-
+        npcDetection(npcs);
         renderer.render(scene, camera);
+    }
+
+    function npcDetection(npcList) {
+
+        for (var i = 0; i < npcList.length; i++) {
+            if (x === npcList[i][0] && z === npcList[i][1]) {
+                //console.log('found............');
+                $('#npcFound').html('Npc found at : ' + npcList[i] + ' ' + Score.npcData[1].npc_name);
+            } else {
+                //$('#npcFound').html('Not Yet');
+            }
+        }
+
     }
 
     function addCubes(scene, camera, wireFrame) {
@@ -150,8 +168,10 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls'], function(Floor, Po
     }
 
     function readDataBase() {
-        $.getJSON('/read?docName=npcsDoc', function(data) {
+        $.getJSON('/read?docName=npcObjects', function(data) {
+            Score.npcData = JSON.stringify(data.docs, null, 4);
             console.log(JSON.stringify(data.docs, null, 4));
+            console.log('testing');
 
         }).fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ', ' + error;

@@ -37,7 +37,7 @@ function designDocs(router, nano, dbName) {
         });
     };
 
-    var docNpcsDoc = function(doc) {
+    var docNpcObjects = function(doc) {
         if (doc._id === 'npcObjects') {
             var data = [];
             doc.docs.forEach(function(npc) {
@@ -113,8 +113,8 @@ function designDocs(router, nano, dbName) {
                 'docNpcSecurity': {
                     'map': docNpcSecurity
                 },
-                'docNpcsDoc': {
-                    'map': docNpcsDoc
+                'docNpcObjects': {
+                    'map': docNpcObjects
                 }
                 /*,
                                 "viewStatesDoc" : {

@@ -71,7 +71,7 @@ queryController.readOne = function($q) {
 
 queryController.viewOneDoc = function($q) {
     'use strict';
-    return runQuery('/viewOneDoc?designDoc=npcs&view=docNpcsDoc', $q);
+    return runQuery('/viewOneDoc?designDoc=npcs&view=docNpcObjects', $q);
 };
 
 queryController.viewBulkAngular = function($q) {

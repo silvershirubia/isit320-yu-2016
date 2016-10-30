@@ -61,11 +61,10 @@ define(['Npcs'],function(Npcs) {
     Collisions.prototype.npcDetection = function(position){
 
         for(var i = 0; i < npcList.length; i++){
-                if(npcList.indexOf(position)){
-                    return true;
-                    console.log('TRUUUUUUUUUUUUUUUUE');
-                }
-
+            if(x === npcList[i][0] && z === npcList[i][1]){
+                console.log('found............');
+                return true;
+            }
         }
         return false;
     }
