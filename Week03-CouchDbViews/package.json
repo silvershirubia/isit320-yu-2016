@@ -9,6 +9,21 @@
   "dependencies": {
     "inquirer": "^1.2.1",
     "nano": "^6.1.2",
-    "request-debug": "^0.2.0"
+    "request-debug": "^0.2.0","grunt": "~1.0.1",
+    "grunt": "~1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jade": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-exec": "^0.4.6",
+    "grunt-jsbeautifier": "^0.2.10",
+    "grunt-jscs": "^2.3.0",
+    "grunt-karma": "^0.12.1",
+    "jasmine-core": "^2.3.4",
+    "jasmine-spec-reporter": "^2.7.0",
+    "jshint-stylish": "^2.0.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "~0.3.3",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "~0.0.23"
   }
 }

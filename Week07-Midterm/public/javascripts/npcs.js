@@ -5,6 +5,7 @@ define(function() {
     'use strict';
 
     var baseName = 'npc';
+    var gridNpc;
     var THREE;
 
     Npcs.prototype.npcList = [];
@@ -36,14 +37,16 @@ define(function() {
     }
 
     Npcs.prototype.removeNpc = function(x, z, scene, gridNpc) {
-        gridNpc[x][z] = 0;
+        //gridNpc[x][z] = 0;
+        //console.log(gridNpc);
+
         var objectName = getName(baseName, x, z);
         var selectedObject = scene.getObjectByName(objectName);
         var index = this.npcList.indexOf(selectedObject);
         this.npcList.splice(index, 1);
         scene.remove(selectedObject);
-    };
 
+    };
 
     return Npcs;
 });

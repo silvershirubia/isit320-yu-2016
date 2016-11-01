@@ -1,9 +1,9 @@
 /**
  * Created by bcuser on 10/26/16.
  */
-define(['Npcs'],function(Npcs) {
+define(['Npcs'], function(Npcs) {
     'use strict';
-    var npcList = [];
+    //var npcList = [];
     var size;
     var THREE;
 
@@ -58,16 +58,16 @@ define(['Npcs'],function(Npcs) {
         return false;
     };
 
-    Collisions.prototype.npcDetection = function(x, z){
+    Collisions.prototype.npcDetection = function(x, z, npcList) {
 
-        for(var i = 0; i < npcList.length; i++){
-            if(x === npcList[i][0] && z === npcList[i][1]){
+        for (var i = 0; i < npcList.length; i++) {
+            if (x === npcList[i][0] && z === npcList[i][1]) {
                 console.log('found............');
                 return true;
             }
         }
         return false;
-    }
+    };
 
     return Collisions;
 });

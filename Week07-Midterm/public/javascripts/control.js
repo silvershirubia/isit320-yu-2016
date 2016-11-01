@@ -104,7 +104,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
             $('#npcs').append('<li>' + npc.npcList[i] +
                 '</li>');
         }
-        $('#test').html('foundNpc = ' + foundNpc.valueOf());
+
     }
 
     function animate() {
@@ -123,10 +123,12 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         collisions.collisionDetection(controls, cubes, raycaster);
         //mainCharacter = mainCharacter[x][z];
 
-        foundNpc = collisions.npcDetection(gridX, gridZ);
+        foundNpc = collisions.npcDetection(gridX, gridZ, npc.npcList);
 
-        if(foundNpc){
-            var gridNpc = npc.npcList[gridX][gridZ];
+        if (foundNpc) {
+            $('#eliminate').html('found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
+            var gridNpc = npc.npcList[gridX, gridZ];
+
             npc.removeNpc(gridX,gridZ,scene,gridNpc);
         }
         // Move the camera
