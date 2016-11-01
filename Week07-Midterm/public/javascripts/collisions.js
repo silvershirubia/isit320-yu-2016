@@ -62,7 +62,6 @@ define(['Npcs'], function(Npcs) {
 
         for (var i = 0; i < npcList.length; i++) {
             if (x === npcList[i][0] && z === npcList[i][1]) {
-                console.log('found............');
                 return true;
             }
         }

@@ -11,7 +11,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
     var gridX;
     var gridZ;
     var npc;
-    //var npcList = [];
     var raycaster = null;
     var renderer = null;
     var scene = null;
@@ -42,11 +41,13 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var screenWidth = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(75, screenWidth, 1, 1000);
-
+        npc = new Npcs(THREE);
+        collisions = new Collisions(THREE, size);
         scene = new THREE.Scene();
         scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
         addCubes(scene, camera, false);
+        npc.addNpcs(scene, camera, false, size);
 
         doPointerLock();
 
@@ -54,9 +55,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var floor = new Floor(THREE);
         floor.drawFloor(scene);
-
-        npc = new Npcs(THREE);
-        collisions = new Collisions(THREE, size);
 
         raycaster = new THREE.Raycaster(new THREE.Vector3(),
             new THREE.Vector3(0, -1, 0), 0, 10);
@@ -98,6 +96,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         $('#mazeX').html(gridX);
         $('#mazeZ').html(gridZ);
 
+        $('#alive').html(npc.npcList.length);
+        $('#dead').html(npc.dead);
+
         $('#npcs').empty();
 
         for (var i = 0; i < npc.npcList.length; i++) {
@@ -126,10 +127,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         foundNpc = collisions.npcDetection(gridX, gridZ, npc.npcList);
 
         if (foundNpc) {
-            $('#eliminate').html('found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
-            var gridNpc = npc.npcList[gridX, gridZ];
-
-            npc.removeNpc(gridX,gridZ,scene,gridNpc);
+            $('#eliminate').html('Found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
+            npc.dead ++;
+            npc.removeNpc(gridX, gridZ, scene);
         }
         // Move the camera
         controls.update();
@@ -149,18 +149,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
                         addCube(scene, camera, false, i * size, -j * size, floorTexture);
 
-                    }
-                }
-            }
-
-        });
-
-        $.getJSON('npcs000.json', function(grid) {
-            for (var i = 0; i < grid.length; i++) {
-                for (var j = 0; j < grid[i].length; j++) {
-                    if (grid[i][j] !== 0) {
-                        npc.npcList.push([i, j]);
-                        npc.createNpc(scene, camera, wireFrame, i * size, -j * size, size);
                     }
                 }
             }
