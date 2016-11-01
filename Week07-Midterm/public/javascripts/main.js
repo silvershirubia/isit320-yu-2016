@@ -13,6 +13,7 @@ requirejs.config({
         'Npcs': 'javascripts/npcs',
         'PointerLockControls': 'javascripts/pointer-lock-controls',
         'PointerLockSetup': 'javascripts/pointer-lock-setup',
+        'ReadDatabase': 'javascripts/read-database',
         'Score': 'javascripts/score'
 
     },

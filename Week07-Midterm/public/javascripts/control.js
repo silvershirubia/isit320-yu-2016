@@ -1,12 +1,13 @@
 /* globals define: true, THREE:true */
 
-define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Npcs, Score) {
+define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs', 'ReadDatabase', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Npcs, ReadDatabase, Score) {
     'use strict';
 
     var camera = null;
     var collisions;
     var controls = null;
     var cubes = [];
+    var database;
     var foundNpc = false;
     var gridX;
     var gridZ;
@@ -41,6 +42,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var screenWidth = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(75, screenWidth, 1, 1000);
+        //database = new ReadDatabase();
         npc = new Npcs(THREE);
         collisions = new Collisions(THREE, size);
         scene = new THREE.Scene();
@@ -155,11 +157,12 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         });
 
+        //database.readDataBase();
         readDataBase();
 
     }
 
-    function readDataBase() {
+    function readDataBase () {
         $.getJSON('/read?docName=npcObjects', function(data) {
             Score.npcData = data.docs;
             console.log(JSON.stringify(data.docs, null, 4));
@@ -175,6 +178,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
             alert('Database not connected' + responseValue);
         });
     }
+
 
     function addCube(scene, camera, wireFrame, x, z, floorTexture) {
         //var geometry = new THREE.BoxGeometry(1, 1, 1);
