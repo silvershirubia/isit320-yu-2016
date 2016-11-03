@@ -3,8 +3,9 @@
  */
 
 define(['Route', 'nameController', 'queryController'], function (Route, nameController, queryController) {
+    'use strict';
 
-    var findRoutes = (function ($routeProvider) {
+    var control = (function ($routeProvider) {
         'use strict';
         $routeProvider.when('/databaseName', {
             templateUrl: 'templates/DatabaseNames.html',
@@ -15,58 +16,64 @@ define(['Route', 'nameController', 'queryController'], function (Route, nameCont
             }
         }).when('/deleteDb', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.delete
             }
         }).when('/createDb', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.create
             }
         }).when('/insertNpcsBulk', {
-            templateUrl: 'templates/InsertReport.html',
-            controller: queryController,
+            templateUrl: 'templates/States.html',
+            controller: 'QueryController',
             resolve: {
-                result: queryController.insertNpcsBulk
+                result: queryController.npcsBulk
             }
         }).when('/insertNpcsOneDoc', {
-            templateUrl: 'templates/InsertReport.html',
-            controller: queryController,
+            templateUrl: 'templates/States.html',
+            controller: 'QueryController',
             resolve: {
-                result: queryController.insertNpcsOneDoc
+                result: queryController.npcsOneDoc
             }
         }).when('/insertDesignDoc', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.design
             }
         }).when('/readOne', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.readOne
             }
-        }).when('/viewNpcsBulk', {
+        }).when('/viewBulk', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.viewBulk
             }
-        }).when('/viewNpcsOneDoc', {
+        }).when('/viewOneDoc', {
             templateUrl: 'templates/QueryView.html',
-            controller: queryController,
+            controller: 'QueryController',
             resolve: {
                 result: queryController.viewOneDoc
+            }
+        }).when('/viewBulkNpcSecurity', {
+            templateUrl: 'templates/QueryView.html',
+            controller: 'QueryController',
+            resolve: {
+                result: queryController.viewBulkAngular
             }
         }).otherwise({
             redirectTo: '/'
         });
     });
 
-    return findRoutes;
+    return control;
 
 });
 
