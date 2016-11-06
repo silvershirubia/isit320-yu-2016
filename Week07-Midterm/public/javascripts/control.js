@@ -1,16 +1,17 @@
 /* globals define: true, THREE:true */
 
-define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs', 'ReadDatabase', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Npcs, ReadDatabase, Score) {
+define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze', 'Npcs', 'ReadDatabase', 'Score'], function(Floor, PointerLockSetup, PointerLockControls, Collisions, Maze, Npcs, ReadDatabase, Score) {
     'use strict';
 
     var camera = null;
     var collisions;
     var controls = null;
-    var cubes = [];
     var database;
     var foundNpc = false;
     var gridX;
     var gridZ;
+    var maxNpcs;
+    var maze;
     var npc;
     var raycaster = null;
     var renderer = null;
@@ -42,17 +43,20 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
 
         var screenWidth = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(75, screenWidth, 1, 1000);
-        //database = new ReadDatabase();
-        npc = new Npcs(THREE);
+
+        maze = new  Maze(THREE, size);
+        npc = new Npcs(THREE, size);
         collisions = new Collisions(THREE, size);
         scene = new THREE.Scene();
         scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
-        addCubes(scene, camera, false);
-        npc.addNpcs(scene, camera, false, size);
+        maze.addCubes(scene, camera, false);
+        npc.addNpcs(scene, camera, false);
 
+        maxNpcs = npc.npcList.length;
+
+        readDataBase();
         doPointerLock();
-
         addLights();
 
         var floor = new Floor(THREE);
@@ -114,23 +118,27 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         requestAnimationFrame(animate);
 
         var xAxis = new THREE.Vector3(1, 0, 0);
-        collisions.collisionDetection(controls, cubes, raycaster);
+        collisions.collisionDetection(controls, maze.cubes, raycaster);
 
         controls.isOnObject(false);
 
         var controlObject = controls.getObject();
         var position = controlObject.position;
 
-        // drawText(controlObject, position);
-        drawText(position);
-        collisions.collisionDetection(controls, cubes, raycaster);
-        //mainCharacter = mainCharacter[x][z];
+
+        collisions.collisionDetection(controls, maze.cubes, raycaster);
 
         foundNpc = collisions.npcDetection(gridX, gridZ, npc.npcList);
+        drawText(position);
 
         if (foundNpc) {
             $('#eliminate').html('Found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
-            npc.dead ++;
+            if(npc.dead < npc.maxNpcs){
+                npc.dead ++;
+            }else{
+                npc.dead = npc.maxNpcs;
+            }
+
             npc.removeNpc(gridX, gridZ, scene);
         }
         // Move the camera
@@ -139,29 +147,16 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
         renderer.render(scene, camera);
     }
 
-    function addCubes(scene, camera, wireFrame) {
-
-        var loader = new THREE.TextureLoader();
-        var floorTexture = loader.load('images/crate.jpg');
-
-        $.getJSON('grid000.json', function(grid) {
-            for (var i = 0; i < grid.length; i++) {
-                for (var j = 0; j < grid[i].length; j++) {
-                    if (grid[i][j] === 1) {
-
-                        addCube(scene, camera, false, i * size, -j * size, floorTexture);
-
-                    }
-                }
-            }
-
-        });
-
-        //database.readDataBase();
-        readDataBase();
-
+    function addLights() {
+        var light = new THREE.DirectionalLight(0xffffff, 1.5);
+        light.position.set(1, 1, 1);
+        scene.add(light);
+        light = new THREE.DirectionalLight(0xffffff, 0.75);
+        light.position.set(-1, -0.5, -1);
+        scene.add(light);
     }
 
+    //read npcObjects data from database
     function readDataBase () {
         $.getJSON('/read?docName=npcObjects', function(data) {
             Score.npcData = data.docs;
@@ -177,32 +172,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Npcs
             console.log(responseValue);
             alert('Database not connected' + responseValue);
         });
-    }
-
-
-    function addCube(scene, camera, wireFrame, x, z, floorTexture) {
-        //var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var geometry = new THREE.BoxGeometry(size, size, size);
-
-        var material = new THREE.MeshLambertMaterial({
-            map: floorTexture
-        });
-
-        var cube = new THREE.Mesh(geometry, material);
-        cube.position.set(x, size / 2, z);
-        scene.add(cube);
-
-        cubes.push(cube);
-        return cube;
-    }
-
-    function addLights() {
-        var light = new THREE.DirectionalLight(0xffffff, 1.5);
-        light.position.set(1, 1, 1);
-        scene.add(light);
-        light = new THREE.DirectionalLight(0xffffff, 0.75);
-        light.position.set(-1, -0.5, -1);
-        scene.add(light);
     }
 
     return Control;

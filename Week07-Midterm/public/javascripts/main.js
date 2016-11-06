@@ -10,6 +10,7 @@ requirejs.config({
         'control': 'javascripts/control',
         'Collisions': 'javascripts/collisions',
         'Floors': 'javascripts/floors',
+        'Maze': 'javascripts/maze',
         'Npcs': 'javascripts/npcs',
         'PointerLockControls': 'javascripts/pointer-lock-controls',
         'PointerLockSetup': 'javascripts/pointer-lock-setup',

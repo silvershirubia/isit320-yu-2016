@@ -6,18 +6,21 @@ define(function() {
 
     var baseName = 'npc';
     var gridNpc;
+    var maxNpc;
     var npcList = [];
+    var size;
     var THREE;
 
     Npcs.prototype.npcList = npcList;
-    Npcs.prototype.living = 0;
     Npcs.prototype.dead = 0;
+    Npcs.prototype.maxNpcs = 0;
 
-    function Npcs(threeInit) {
+    function Npcs(threeInit, npcSize) {
+        size = npcSize;
         THREE = threeInit;
     }
 
-    var createNpc = function(scene, camera, wireFrame, x, z, size) {
+    var createNpc = function(scene, camera, wireFrame, x, z) {
         var geometry = new THREE.SphereGeometry(10, 40, 25);
         var material = new THREE.MeshNormalMaterial({
             wireframe: wireFrame
@@ -36,18 +39,18 @@ define(function() {
         return sphere;
     };
 
-    Npcs.prototype.addNpcs = function (scene, camera, wireFrame, size) {
+    Npcs.prototype.addNpcs = function (scene, camera, wireFrame) {
         $.getJSON('npcs000.json', function(grid) {
             gridNpc = grid;
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] !== 0) {
+                        Npcs.prototype.maxNpcs ++;
                         npcList.push([i, j]);
-                        createNpc(scene, camera, wireFrame, i * size, -j * size, size);
+                        createNpc(scene, camera, wireFrame, i * size, -j * size);
                     }
                 }
             }
-
         });
     }
 
@@ -61,8 +64,9 @@ define(function() {
         gridNpc[x][z] = 0;
         var objectName = getName(baseName, x, z);
         var selectedObject = scene.getObjectByName(objectName);
-        var index = Math.abs(npcList.indexOf(selectedObject));
+        var index = npcList.indexOf(selectedObject);
         npcList.splice(index, 1);
+        console.log(npcList.length);
         scene.remove(selectedObject);
 
     };
