@@ -2,10 +2,10 @@
  * Created by bcuser on 10/31/16.
  */
 
-define('Score', function (Score) {
+define('Score', function(Score) {
+    'use strict';
 
-
-     var readDataBase = function() {
+    var readDataBase = function() {
         $.getJSON('/read?docName=npcObjects', function(data) {
             Score.npcData = data.docs;
             console.log(JSON.stringify(data.docs, null, 4));

@@ -37,22 +37,20 @@ define(function() {
         return sphere;
     };
 
-    Npcs.prototype.addNpcs = function (scene, camera, wireFrame) {
+    Npcs.prototype.addNpcs = function(scene, camera, wireFrame) {
         $.getJSON('npcs000.json', function(grid) {
             gridNpc = grid;
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] !== 0) {
-                        Npcs.prototype.maxNpcs ++;
+                        Npcs.prototype.maxNpcs++;
                         Npcs.prototype.npcList.push([i, j]);
                         createNpc(scene, camera, wireFrame, i * size, -j * size);
                     }
                 }
             }
         });
-    }
-
-
+    };
 
     function getName(baseName, x, z) {
         return baseName + '_' + x + '_' + z;
@@ -62,10 +60,10 @@ define(function() {
         gridNpc[x][z] = 0;
         var objectName = getName(baseName, x, z);
         var selectedObject = scene.getObjectByName(objectName);
-        var index = 0;//this.npcList.indexOf(selectedObject);//didn't work for me
+        var index = 0; //this.npcList.indexOf(selectedObject);//didn't work for me
 
-        for(var i = 0; i < this.npcList.length; i++){
-            if(this.npcList[i][0] === x && this.npcList[i][1] === z){
+        for (var i = 0; i < this.npcList.length; i++) {
+            if (this.npcList[i][0] === x && this.npcList[i][1] === z) {
                 index = i;
             }
         }

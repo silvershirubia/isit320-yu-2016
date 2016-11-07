@@ -1,7 +1,7 @@
 /**
  * Created by bcuser on 11/6/16.
  */
-define(function () {
+define(function() {
     'use strict';
 
     var cubes = [];
@@ -30,7 +30,7 @@ define(function () {
 
                         addCube(scene, camera, false, i * size, -j * size, floorTexture);
 
-                    }else{
+                    } else {
                         Maze.prototype.maxSquares++;
                     }
                 }
@@ -38,16 +38,16 @@ define(function () {
 
         });
 
-    }
+    };
 
-    Maze.prototype.explored = function (x, z) {
+    Maze.prototype.explored = function(x, z) {
 
-        if(gridMaze[x][z] === 0){
-            Maze.prototype.maxSquares --;
+        if (gridMaze[x][z] === 0) {
+            Maze.prototype.maxSquares--;
             gridMaze[x][z] = 1;
         }
 
-    }
+    };
 
     function addCube(scene, camera, wireFrame, x, z, floorTexture) {
         //var geometry = new THREE.BoxGeometry(1, 1, 1);

@@ -3,5 +3,5 @@
     "validateIndentation": 4,
     "excludeFiles": ["**/node_modules/**", "**/components/**", "**/bower_components/**", "**/three.js", "**/pointer-lock-controls.js"],
     "requireCamelCaseOrUpperCaseIdentifiers": false,
-    "maximumLineLength": 200
+    "maximumLineLength": 250
 }

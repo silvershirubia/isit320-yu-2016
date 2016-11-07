@@ -45,7 +45,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
         //X Y Z
         //camera.position.set(0,30,0);
 
-        maze = new  Maze(THREE, size);
+        maze = new Maze(THREE, size);
         npc = new Npcs(THREE, size);
         collisions = new Collisions(THREE, size);
         scene = new THREE.Scene();
@@ -104,11 +104,10 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
         $('#mazeZ').html(gridZ);
         $('#mazeEx').html(maze.maxSquares);
 
-        if(maze.maxSquares === 250){
+        if (maze.maxSquares === 250) {
             window.alert('Finished exploring!!!');
             $('#mazeStatus').html('You have finished exploring.');
         }
-
 
         $('#alive').html(npc.npcList.length);
         $('#dead').html(npc.dead);
@@ -138,9 +137,9 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
 
         if (foundNpc) {
             $('#eliminate').html('Found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
-            if(npc.dead < npc.maxNpcs){
-                npc.dead ++;
-            }else{
+            if (npc.dead < npc.maxNpcs) {
+                npc.dead++;
+            } else {
                 npc.dead = npc.maxNpcs;
             }
 
@@ -154,7 +153,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
 
         renderer.render(scene, camera);
 
-
     }
 
     function addLights() {
@@ -167,7 +165,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
     }
 
     //read npcObjects data from database
-    function readDataBase () {
+    function readDataBase() {
         $.getJSON('/read?docName=npcObjects', function(data) {
             Score.npcData = data.docs;
             console.log(JSON.stringify(data.docs, null, 4));
