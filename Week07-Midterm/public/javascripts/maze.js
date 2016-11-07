@@ -5,11 +5,13 @@ define(function () {
     'use strict';
 
     var cubes = [];
-    var mazeGrid;
+    var gridMaze;
     var size;
     var THREE;
 
     Maze.prototype.cubes = cubes;
+    Maze.prototype.maxSquares = 0;
+
     function Maze(threeInit, cSize) {
         THREE = threeInit;
         size = cSize;
@@ -21,21 +23,29 @@ define(function () {
         var floorTexture = loader.load('images/crate.jpg');
 
         $.getJSON('grid000.json', function(grid) {
-            mazeGrid = grid;
+            gridMaze = grid;
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] === 1) {
 
                         addCube(scene, camera, false, i * size, -j * size, floorTexture);
 
+                    }else{
+                        Maze.prototype.maxSquares++;
                     }
                 }
             }
 
         });
 
-        //database.readDataBase();
-        //readDataBase();
+    }
+
+    Maze.prototype.explored = function (x, z) {
+
+        if(gridMaze[x][z] === 0){
+            Maze.prototype.maxSquares --;
+            gridMaze[x][z] = 1;
+        }
 
     }
 
@@ -53,15 +63,6 @@ define(function () {
 
         cubes.push(cube);
         return cube;
-    }
-
-    function addLights() {
-        var light = new THREE.DirectionalLight(0xffffff, 1.5);
-        light.position.set(1, 1, 1);
-        scene.add(light);
-        light = new THREE.DirectionalLight(0xffffff, 0.75);
-        light.position.set(-1, -0.5, -1);
-        scene.add(light);
     }
 
     return Maze;

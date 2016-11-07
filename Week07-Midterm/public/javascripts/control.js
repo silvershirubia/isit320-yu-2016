@@ -6,7 +6,6 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
     var camera = null;
     var collisions;
     var controls = null;
-    var database;
     var foundNpc = false;
     var gridX;
     var gridZ;
@@ -29,7 +28,7 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
     var cameraPosition = {
         x: 0,
         y: 10,
-        z: 10
+        z: 0
     };
 
     function Control(initThree) {
@@ -43,6 +42,8 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
 
         var screenWidth = window.innerWidth / window.innerHeight;
         camera = new THREE.PerspectiveCamera(75, screenWidth, 1, 1000);
+        //X Y Z
+        //camera.position.set(0,30,0);
 
         maze = new  Maze(THREE, size);
         npc = new Npcs(THREE, size);
@@ -101,6 +102,13 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
 
         $('#mazeX').html(gridX);
         $('#mazeZ').html(gridZ);
+        $('#mazeEx').html(maze.maxSquares);
+
+        if(maze.maxSquares === 250){
+            window.alert('Finished exploring!!!');
+            $('#mazeStatus').html('You have finished exploring.');
+        }
+
 
         $('#alive').html(npc.npcList.length);
         $('#dead').html(npc.dead);
@@ -118,18 +126,15 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
         requestAnimationFrame(animate);
 
         var xAxis = new THREE.Vector3(1, 0, 0);
-        collisions.collisionDetection(controls, maze.cubes, raycaster);
-
+        //collisions.collisionDetection(controls, maze.cubes, raycaster);
         controls.isOnObject(false);
-
         var controlObject = controls.getObject();
         var position = controlObject.position;
-
+        drawText(position);
 
         collisions.collisionDetection(controls, maze.cubes, raycaster);
 
         foundNpc = collisions.npcDetection(gridX, gridZ, npc.npcList);
-        drawText(position);
 
         if (foundNpc) {
             $('#eliminate').html('Found ' + Score.npcData[0].npc_name + ' at = ' + gridX + ' and ' + gridZ);
@@ -141,10 +146,15 @@ define(['Floors', 'PointerLockSetup', 'PointerLockControls', 'Collisions', 'Maze
 
             npc.removeNpc(gridX, gridZ, scene);
         }
+
+        maze.explored(gridX, gridZ);
+
         // Move the camera
         controls.update();
 
         renderer.render(scene, camera);
+
+
     }
 
     function addLights() {

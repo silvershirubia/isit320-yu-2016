@@ -6,12 +6,10 @@ define(function() {
 
     var baseName = 'npc';
     var gridNpc;
-    var maxNpc;
-    var npcList = [];
     var size;
     var THREE;
 
-    Npcs.prototype.npcList = npcList;
+    Npcs.prototype.npcList = [];
     Npcs.prototype.dead = 0;
     Npcs.prototype.maxNpcs = 0;
 
@@ -46,7 +44,7 @@ define(function() {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j] !== 0) {
                         Npcs.prototype.maxNpcs ++;
-                        npcList.push([i, j]);
+                        Npcs.prototype.npcList.push([i, j]);
                         createNpc(scene, camera, wireFrame, i * size, -j * size);
                     }
                 }
@@ -64,9 +62,15 @@ define(function() {
         gridNpc[x][z] = 0;
         var objectName = getName(baseName, x, z);
         var selectedObject = scene.getObjectByName(objectName);
-        var index = npcList.indexOf(selectedObject);
-        npcList.splice(index, 1);
-        console.log(npcList.length);
+        var index = 0;//this.npcList.indexOf(selectedObject);//didn't work for me
+
+        for(var i = 0; i < this.npcList.length; i++){
+            if(this.npcList[i][0] === x && this.npcList[i][1] === z){
+                index = i;
+            }
+        }
+
+        this.npcList.splice(index, 1);
         scene.remove(selectedObject);
 
     };
