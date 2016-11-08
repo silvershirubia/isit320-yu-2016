@@ -1,5 +1,5 @@
-var clientId = '766164277407-h3gubp81napgss474nm28hgba207cr0h.apps.googleusercontent.com';
-var clientSecret = 'O29ZfAk9NOLHbWdKI9C4_Qb1';
+//var clientId = '766164277407-h3gubp81napgss474nm28hgba207cr0h.apps.googleusercontent.com';
+//var clientSecret = 'O29ZfAk9NOLHbWdKI9C4_Qb1';
 
 var express = require('express');
 var router = express.Router();
