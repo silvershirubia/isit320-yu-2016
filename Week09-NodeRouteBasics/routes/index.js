@@ -10,7 +10,7 @@ router.get('/feetToMiles', function(request, response) { 'use strict';
   'use strict';
 
   var miles = parseInt(request.query.miles) /5280;
-  
+
   response.send({
     result: 'success',
     ok: true,
