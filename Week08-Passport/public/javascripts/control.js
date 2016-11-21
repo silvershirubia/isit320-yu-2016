@@ -8,6 +8,11 @@ var Control = (function() {
     function Control() {
         console.log("Control constructor called");
         $("#status").click(info);
+        $('#back').click(back);
+    }
+
+    var back = function() {
+        window.location.href = 'http://localhost:30025';
     }
 
     var info = function() {

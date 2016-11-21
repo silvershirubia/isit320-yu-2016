@@ -1,9 +1,19 @@
 extends layout
 
 block content
-    p= user.displayName
+    h2= title
+
+    p Welcome to #{title}
+
+    p Family Name:
+        span#Username #{user.name.familyName}
+
+    p Name:
+        span#name #{user.displayName}
+
+    p ID:
+        span#ID #{user.id}
+
     img(src= user.photos[0].value)
-
-    p= user._json.tagline
-
-    p= user._json.aboutMe
+    br
+    button#back Back
