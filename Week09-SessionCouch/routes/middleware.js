@@ -4,9 +4,7 @@
 
 var express = require('express');
 var router = express.Router();
-var session = require('express-session'),
-    connect = require('connect'),
-    ConnectCouchDB = require('connect-couchdb')(session);
+
 // LOAD PARSEURL:
 var parseurl = require('parseurl');
 
@@ -14,22 +12,7 @@ var parseurl = require('parseurl');
 var session = require('express-session');
 var uuid = require('uuid');
 var FileStore = require('session-file-store')(session);
-
-
-router.use(function(request, response, next) {
-    'use strict';
-    console.log('Sample middleware with useful output');
-    console.log('request cookies', request.cookies);
-    console.log('request secret', request.secret);
-    // Uncomment the following line for one run, perhaps.
-    // It is too verbose to use everytime
-    // console.log(Object.getOwnPropertyNames(request));
-    next();
-});
-
-//couch session
-
-var couchServer = '168.156.47.55';
+var ConnectCouchDB = require('connect-couchdb')(session);
 
 var couchStore = new ConnectCouchDB({
     // Name of the database you would like to use for sessions.
@@ -39,7 +22,7 @@ var couchStore = new ConnectCouchDB({
     // for more informations
     //username: 'username',
     //password: 'password',
-    host: couchServer,
+    host: 'localhost',
 
     // Optional. How often expired sessions should be cleaned up.
     // Defaults to 600000 (10 minutes).
@@ -55,8 +38,6 @@ var couchStore = new ConnectCouchDB({
     setThrottle: 60000
 });
 
-//end couch session
-
 router.use(session({
     genid: function(req) {
         'use strict';
@@ -66,6 +47,28 @@ router.use(session({
     resave: true,
     saveUninitialized: true,
     store: couchStore
+}));
+
+router.use(function(request, response, next) {
+    'use strict';
+    console.log('Sample middleware with useful output');
+    console.log('request cookies', request.cookies);
+    console.log('request secret', request.secret);
+    // Uncomment the following line for one run, perhaps.
+    // It is too verbose to use everytime
+    // console.log(Object.getOwnPropertyNames(request));
+    next();
+});
+
+router.use(session({
+    genid: function(req) {
+        'use strict';
+        return uuid.v4(); // use UUIDs for session IDs
+    },
+    secret: process.env.SESSION_SECRET || 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    store: new FileStore()
 }));
 
 router.use(function(request, response, next) {
