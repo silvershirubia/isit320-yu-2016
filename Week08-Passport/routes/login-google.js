@@ -24,7 +24,7 @@ function ensureAuthenticated(req, res, next) {
 
 router.get('/account', ensureAuthenticated, function(request, response) {
     'use strict';
-    console.log(request.user);
+    //console.log(request.user);
     response.render('profile-google', {
         title: 'Google Account',
         user: request.user

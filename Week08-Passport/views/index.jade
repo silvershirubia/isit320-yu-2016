@@ -4,22 +4,28 @@ block content
   h1= title
   p Welcome to #{title}
 
-  div
-    a(href='/facebook/login') Log In with Facebook
-  div
-    a(href="/facebook/profile") Facebook Profile
+  .panel.panel-default
+    .panel-heading Twitter
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/twitter/login') Log In with Twitter
+        li.list-group-item
+          a(href='/twitter/profile') Twitter Profile
 
-  div
-    a(href='/auth/google') Log In Google
-  div
-    a(href='/auth/account') Google Account
+  .panel.panel-default
+    .panel-heading Google
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/auth/google') Log In Google
+        li.list-group-item
+          a(href='/auth/account') Google Account
 
   div
     a(href='/logout') Logout
-
+  br
   button#status Status
 
   div
     pre#report
-  div
-    pre#debug
