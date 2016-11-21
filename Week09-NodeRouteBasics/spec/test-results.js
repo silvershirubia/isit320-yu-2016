@@ -13,7 +13,6 @@ describe('Elvenware Simple Plain Suite', function() {
         expect(true).toBe(true);
     });
 
-
     it('expects route /getOnea not to exist', function(done) {
         // console.log("Expect:", request(app).get('/').expect(1, done));
         request(app)
@@ -21,7 +20,9 @@ describe('Elvenware Simple Plain Suite', function() {
             .expect('Content-Type', /html/)
             .expect(404)
             .end(function(err, res) {
-                if (err) throw err;
+                if (err) {
+                    throw err;
+                }
                 done();
             });
     });
@@ -31,8 +32,10 @@ describe('Elvenware Simple Plain Suite', function() {
             .get('/getFeetInMile')
             .expect(200)
             .expect('Content-Type', /json/)
-            .end(function(err, res){
-                if(err) throw err;
+            .end(function(err, res) {
+                if (err) {
+                    throw err;
+                }
                 expect(res.body.result).toBe(5280);
                 done();
             });
@@ -43,8 +46,10 @@ describe('Elvenware Simple Plain Suite', function() {
             .get('/calculateFeet')
             .expect(200)
             .expect('Content-Type', /json/)
-            .end(function(err, res){
-                if(err) throw err;
+            .end(function(err, res) {
+                if (err) {
+                    throw err;
+                }
                 done();
             });
     });
@@ -52,11 +57,15 @@ describe('Elvenware Simple Plain Suite', function() {
     it('calculateCircumferenceResult', function(done) {
         request(app)
             .get('/calculateCircumference')
-            .query({radius: 5})
+            .query({
+                radius: 5
+            })
             .expect(200)
             .expect('Content-Type', /json/)
-            .end(function(err, res){
-                if(err) throw err;
+            .end(function(err, res) {
+                if (err) {
+                    throw err;
+                }
                 done();
             });
     });

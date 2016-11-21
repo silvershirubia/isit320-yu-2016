@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                 }
             }
         },
- 
+
         karma: {
             karma: {
                 configFile: 'karma.conf.js'
