@@ -1,8 +1,6 @@
 /**
- * @name CouchDesignDoc
+ * New node file
  */
-
-/* globals emit: true */
 
 function designDocs(router, nano, dbName) {
     'use strict';
@@ -27,7 +25,7 @@ function designDocs(router, nano, dbName) {
     };
 
     var docBulk = function(doc) {
-        emit(doc._id, doc.name);
+        emit(doc._id, doc.npc_name);
     };
 
     var docNpcSecurity = function(doc) {
@@ -88,12 +86,8 @@ function designDocs(router, nano, dbName) {
         var nanoDb = nano.db.use(dbName);
         nanoDb.insert(designDocument, designName, function(error, body) {
             if (!error) {
-                var result = {
-                    'ok': true,
-                    data: body
-                };
-                console.log(result);
-                response.status(200).send(result);
+                console.log(body);
+                response.send(body);
             } else {
                 console.log('error: ' + error);
                 response.send({

@@ -3,13 +3,15 @@
  */
 
 function CouchDatabase(router, nano, dbName) {
-
-    router.get('/createDb', function (request, response) {
-        'use strict';
+    'use strict';
+    router.get('/createDb', function(request, response) {
         console.log('create called.');
-        nano.db.create(dbName, function (err, body) {
+        nano.db.create(dbName, function(err, body) {
             if (!err) {
-                body.data = [{"result": "Database created", "dbName": dbName}];
+                body.data = [{
+                    'result': 'Database created',
+                    'dbName': dbName
+                }];
                 console.log(body);
                 response.status(200).send(body);
             } else {
@@ -21,14 +23,16 @@ function CouchDatabase(router, nano, dbName) {
         });
     });
 
-    router.get('/deleteDb', function (request, response) {
-        'use strict';
-        nano.db.destroy(dbName, function (err, body) {
+    router.get('/deleteDb', function(request, response) {
+        nano.db.destroy(dbName, function(err, body) {
             if (err) {
                 console.log(err);
-                response.status(err.statusCode).send(err)
+                response.status(err.statusCode).send(err);
             } else {
-                body.data = [{result: 'Database deleted', dbName: dbName}];
+                body.data = [{
+                    result: 'Database deleted',
+                    dbName: dbName
+                }];
                 response.status(200).send(body);
             }
         });

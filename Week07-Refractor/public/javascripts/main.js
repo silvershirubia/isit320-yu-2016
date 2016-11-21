@@ -2,8 +2,8 @@
  * Created by bcuser on 11/2/16.
  */
 /**
- * @author: Charlie Calvert
- * @name: main.js
+ * author: Charlie Calvert
+ * name: main.js
  * Created on 10/10/16.
  */
 
@@ -20,7 +20,6 @@ requirejs.config({
     }
 });
 
-
 requirejs(['jquery'], function($) {
     'use strict';
 
@@ -35,7 +34,7 @@ requirejs(['jquery'], function($) {
              * Call findRoutes and pass in Routes object
              *   findRoutes calls route.when for each possible path
              */
-            $('#databaseOptions ul li a').click(function (event) {
+            $('#databaseOptions ul li a').click(function(event) {
                 event.preventDefault();
                 route.setRoute(event.target.pathname);
                 control(route);
