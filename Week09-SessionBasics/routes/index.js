@@ -7,9 +7,11 @@ var routeParamMiddleware = function(request, response, next) {
     next();
 };
 
-router.get('/', routeParamMiddleware, function(req, res, next) { 'use strict';
+router.get('/', routeParamMiddleware, function(req, res, next) {
     'use strict';
-    res.render('index', { title: 'Week09-SessionBasics' });
+    res.render('index', {
+        title: 'Week09-SessionBasics'
+    });
 });
 
 var pageReport = function(request, response) {

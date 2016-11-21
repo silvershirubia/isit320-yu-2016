@@ -13,7 +13,6 @@ var session = require('express-session');
 var uuid = require('uuid');
 var FileStore = require('session-file-store')(session);
 
-
 router.use(function(request, response, next) {
     'use strict';
     console.log('Sample middleware with useful output');
