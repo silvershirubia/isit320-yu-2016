@@ -1,15 +1,15 @@
-$(document).ready(function() { 'use strict';
+$(document).ready(function() {
+    'use strict';
 
-    $("#target").submit(function(event) {
+    $('#target').submit(function(event) {
         event.preventDefault();
         var userFormData = $(this).serialize();
-        $.getJSON('/foo?'+ userFormData, function (result) {
+        $.getJSON('/foo?' + userFormData, function(result) {
 
             $('#serverResults').html(JSON.stringify(result, null, 4));
         });
 
         $('#formResults').html(userFormData.replace(/\&/g, '\n'));
     });
-
 
 });
