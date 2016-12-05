@@ -104,8 +104,9 @@ mixin button(style, href, size)
         block
 
 //- List group mixins
-- var groupType
+
 mixin listGroup(type, id)
+    - var groupType
     - groupType = type
     case groupType
         when 'list'

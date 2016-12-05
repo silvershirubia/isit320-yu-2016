@@ -9,15 +9,32 @@ include mixin-nav.jade
 
 block append content
     +bootswatch('cerulean')
+    .header
+        +nav("Prog320 Midterm", "navigationbar", "navbar-default navbar-fixed-top")
+            +nav_item( "/", "home", "active" ) Home
+            +nav_item( "json-ajax", "json-ajax") JsonAjax
+            +nav_item( "about", "about" ) About
+            +nav_item_dropdown( "#" )( label="Dropdown" )
+                +nav_item( "#" ) Action
+                +nav_item( "#" ) Another action
+                +nav_item( "#" ) Something else here
+                +nav_divider
+                +nav_header Nav header
+                +nav_item( "#" ) Separated link
+                +nav_item( "#" ) One more separated link
 
-    .form-control
-
-        +elfPanel("Actions")
-            input.btn.btn-primary#helpButton(type="submit", value="Help")
-            input.btn.btn-primary#aboutButton(type="submit", value="About")
+    h1 #{pageTitle}
 
     div
-        pre#formResults
 
-    div
-        pre#serverResults
+        +elfPanel("About")
+            img(src='./images/index.png')
+            br
+            button.btn.btn-primary#aboutButton(type="button") About
+
+
+            p#aboutResults
+        div
+            pre#formResults
+
+

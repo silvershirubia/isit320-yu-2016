@@ -5,12 +5,17 @@
 var express = require('express');
 var router = express.Router();
 
+module.exports = (function() {
+    'use strict';
 
-router.get('/about', function(req, res) {
-    res.render('About', {
-        title: 'Prog320-Yu',
-        description: 'jquery demo' });
-});
+    router.get('/about', function(request, response) {
+        console.log('here');
+        response.send({
+            'title': 'Prog320-Yu',
+            'pageTitle': 'About',
+            'description': 'jquery demo'
+        });
+    });
 
-
-module.exports = router;
+    return router;
+})();

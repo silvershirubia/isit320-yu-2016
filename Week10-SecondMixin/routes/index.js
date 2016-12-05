@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+
+router.get('/:id', function(request, response) {
     'use strict';
-    res.render('index', {
-        title: 'Week10-JadeMixinBasics'
+    response.render(request.params.id, {
+        id: request.params.id,
+        pageTitle: request.params.id
     });
 });
 
