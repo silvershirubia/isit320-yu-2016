@@ -30,8 +30,9 @@ $(document).ready(function() {
     $('#session').click(function() {
         showPage('/views/session-status');
     });
-    $('#sessionView').click(function() {
-        showPage('/viewSessions?designDoc=elf-session&view=elf-sessions');
+
+    $('#sessionView').click(function(){
+        showPage('/viewSessions?designDoc=yu-session&view=yu-sessions');
     });
 
     function showPage(pageRoute) {
