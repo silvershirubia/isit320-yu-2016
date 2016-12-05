@@ -15,6 +15,11 @@ $(document).ready(function() {
     $('nav li').hover(function(event) {
         setActiveMenuItem(event.currentTarget.id);
     });
+    
+    //help button
+    $('#helpButton').click(function () {
+        
+    });
 
     function setActiveMenuItem() {
 

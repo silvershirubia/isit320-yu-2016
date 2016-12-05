@@ -1,0 +1,23 @@
+//
+   Created by bcuser on 12/4/16.
+extends layout
+include  mixins.jade
+include mixin-radios.jade
+include mixin-inputs.jade
+include menu-mixin.jade
+include mixin-nav.jade
+
+block append content
+    +bootswatch('cerulean')
+
+    .form-control
+
+        +elfPanel("Actions")
+            input.btn.btn-primary#helpButton(type="submit", value="Help")
+            input.btn.btn-primary#aboutButton(type="submit", value="About")
+
+    div
+        pre#formResults
+
+    div
+        pre#serverResults

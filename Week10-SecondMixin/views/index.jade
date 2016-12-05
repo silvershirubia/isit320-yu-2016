@@ -6,7 +6,7 @@ include menu-mixin.jade
 include mixin-nav.jade
 
 block append content
-
+  +bootswatch('cerulean')
   .header
     +nav("Prog320 Midterm", "navigationbar", "navbar-default navbar-fixed-top")
       +nav_item( "/", "home", "active" ) Home
@@ -39,6 +39,8 @@ block append content
 
       +elfPanel("Actions")
         input.btn.btn-primary(type="submit", value="Go")
+        input.btn.btn-primary#helpButton(type="submit", value="Help")
+        input.btn.btn-primary#aboutButton(type="submit", value="About")
 
     div
       pre#formResults
