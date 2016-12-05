@@ -37,7 +37,7 @@ var couchStore = new ConnectCouchDB({
     // Defaults to 60000 (1 minute)
     setThrottle: 60000
 });
-
+/*
 var sessionStore = sessionstore.createSessionStore({
     type: 'couchdb',
     host: 'http://168.156.47.55', // optional
@@ -46,6 +46,7 @@ var sessionStore = sessionstore.createSessionStore({
     collectionName: 'sessions', // optional
     timeout: 10000 // optional
 }, function(data) {
+    'use strict';
     console.log('sessionStore callback', data);
 });
 
@@ -61,7 +62,7 @@ router.use(session({
     saveUninitialized: true,
     store: sessionStore
 }));
-
+*/
 router.use(session({
     genid: function(req) {
         'use strict';

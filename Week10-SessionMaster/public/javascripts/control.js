@@ -30,6 +30,9 @@ $(document).ready(function() {
     $('#session').click(function() {
         showPage('/views/session-status');
     });
+    $('#sessionView').click(function() {
+        showPage('/viewSessions?designDoc=connect-session&views=connect-session');
+    });
 
     function showPage(pageRoute) {
         // YOUR CODE HERE
