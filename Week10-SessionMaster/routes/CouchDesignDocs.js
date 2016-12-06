@@ -8,7 +8,7 @@ function designDocs(router, nano, dbName) {
     'use strict';
 
     var elfSessions = function(doc) {
-        if (doc.type === 'connect-session') {
+        if (doc.collectionName === 'sessions') {
             emit(doc._id, doc);
         }
     };
@@ -47,7 +47,7 @@ function designDocs(router, nano, dbName) {
         var designName = '_design/elf-session';
         var designDocument = {
             'views': {
-                'elf-session': {
+                'elf-sessions': {
                     'map': elfSessions
                 }
             }

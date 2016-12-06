@@ -83,22 +83,4 @@ router.get('/docNames', function(request, response) {
     });
 });
 
-router.get('/Couch/viewSessions', function(request, response) {
-
-    var nanoDb = nano.db.use(dbName);
-    nanoDb.view(request.query.designDoc, request.query.view, function(err, body) {
-        if (!err) {
-            console.log(body);
-            response.send({
-                'name': 'viewSessions',
-                docs: body
-            });
-        } else {
-            console.log(err);
-            response.status(err.statusCode).send(err);
-        }
-    });
-
-});
-
 module.exports = router;

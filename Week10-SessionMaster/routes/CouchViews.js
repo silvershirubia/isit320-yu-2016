@@ -30,7 +30,7 @@ function views(router, nano, dbName) {
             if (!err) {
                 console.log(body);
                 response.send({
-                    'name': 'viewSessions',
+                    'name': 'viewSession',
                     docs: body
                 });
             } else {

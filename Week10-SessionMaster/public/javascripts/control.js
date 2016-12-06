@@ -32,7 +32,7 @@ $(document).ready(function() {
     });
     $('#sessionView').click(function() {
         //showPage('/Couch/viewSessions');
-        showPage('/viewSessions?designDoc=elf-session&view=elf-session');
+        showPage('/viewSessions?designDoc=elf-session&view=elf-sessions');
     });
 
     function showPage(pageRoute) {
