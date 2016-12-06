@@ -13,6 +13,13 @@ function designDocs(router, nano, dbName) {
         }
     };
 
+    var elfSessionStore = function(doc) {
+        // if the doc **collectionName** property equals **'sessions'** then emit the **doc._id** and the **doc** itself.
+    };
+
+    var elfSessionExpires = function (doc) {
+        // if the doc **collectionName** property equals **'sessions'** and **doc.expires exists** then emit the **doc.expires**.
+    };
 
     function createDesignDocument(designDocument, designName, response) {
         var nanoDb = nano.db.use(dbName);

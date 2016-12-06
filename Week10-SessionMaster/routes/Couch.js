@@ -6,10 +6,8 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-
-var servers = ['http://127.0.0.1:5984', 'http://192.168.2.19:5984', 'http://168.156.47.55:5984'];
-var serverIndex = 0;
-var nano = require('nano')(servers[serverIndex]);
+var setServer = require('./set-server');
+var nano = require('nano')(setServer.serverUrl);
 
 var dbName = 'couch-session-yu';
 
@@ -18,7 +16,7 @@ var insert = require('./CouchInsert')(router, nano, dbName);
 var views = require('./CouchViews')(router, nano, dbName);
 var designDocs = require('./CouchDesignDocs')(router, nano, dbName);
 var attach = require('./CouchAttach')(router, nano, dbName);
-var couchBulk = require('./CouchBulk')(router, dbName, servers[serverIndex]);
+var couchBulk = require('./CouchBulk')(router, dbName, setServer.serverUrl);
 
 router.get('/databaseName', function(request, response) {
     'use strict';
@@ -83,6 +81,24 @@ router.get('/docNames', function(request, response) {
             return;
         }
     });
+});
+
+router.get('/Couch/viewSessions', function(request, response) {
+
+    var nanoDb = nano.db.use(dbName);
+    nanoDb.view(request.query.designDoc, request.query.view, function(err, body) {
+        if (!err) {
+            console.log(body);
+            response.send({
+                'name': 'viewSessions',
+                docs: body
+            });
+        } else {
+            console.log(err);
+            response.status(err.statusCode).send(err);
+        }
+    });
+
 });
 
 module.exports = router;

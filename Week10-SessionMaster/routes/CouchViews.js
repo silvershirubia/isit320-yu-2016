@@ -23,6 +23,23 @@ function views(router, nano, dbName) {
         });
     }
 
+    router.get('/viewSessions', function(request, response) {
+
+        var nanoDb = nano.db.use(dbName);
+        nanoDb.view(request.query.designDoc, request.query.view, function(err, body) {
+            if (!err) {
+                console.log(body);
+                response.send({
+                    'name': 'viewSessions',
+                    docs: body
+                });
+            } else {
+                console.log(err);
+                response.status(err.statusCode).send(err);
+            }
+        });
+
+    });
 
     router.get('/viewBulk', function(request, response) {
         var nanoDb = nano.db.use(dbName);
@@ -36,22 +53,6 @@ function views(router, nano, dbName) {
             }
         });
     });
-
-    router.get('/viewSessions', function(request, response) {
-
-        var nanoDb = nano.db.use(dbName);
-        nanoDb.view(request.query.designDoc, request.query.view, function(err, body) {
-            if (!err) {
-                console.log(body);
-                response.send(body);
-            } else {
-                console.log(err);
-                response.status(err.statusCode).send(err);
-            }
-        });
-
-    });
-
 
 }
 

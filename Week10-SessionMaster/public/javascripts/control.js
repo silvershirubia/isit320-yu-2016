@@ -31,7 +31,8 @@ $(document).ready(function() {
         showPage('/views/session-status');
     });
     $('#sessionView').click(function() {
-        showPage('/viewSessions?designDoc=connect-session&views=connect-session');
+        //showPage('/Couch/viewSessions');
+        showPage('/viewSessions?designDoc=elf-session&view=elf-session');
     });
 
     function showPage(pageRoute) {
