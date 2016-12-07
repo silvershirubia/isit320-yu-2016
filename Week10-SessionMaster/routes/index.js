@@ -1,6 +1,6 @@
-
 var express = require('express');
-var router = express.Router();
+//var router = express.Router();
+var router = require('./Couch');
 var passport = require('passport');
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -9,7 +9,15 @@ router.get('/', function(req, res) {
         title: 'Session Master II'
     });
 });
-
+/*
+router.get('/:id', function(request, response) {
+    'use strict';
+    response.render(request.params.id, {
+        id: request.params.id,
+        pageTitle: request.params.id
+    });
+});
+*/
 var pageReport = function(request, response) {
     'use strict';
     var previousPage = '';
@@ -42,6 +50,7 @@ router.get('/page03', function(request, response) {
     pageReport(request, response);
 });
 
+//************************** PASSPORT STUFF *********************************************
 passport.serializeUser(function(user, done) {
     'use strict';
     done(null, user);

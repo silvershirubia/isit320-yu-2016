@@ -1,0 +1,37 @@
+//
+   Created by bcuser on 12/7/16.
+extends layout
+include mixins
+include mixin-nav
+include mixin-inputs
+
+block append content
+    +bootswatch('cerulean')
+    .header
+        +nav("Prog320 Midterm", "navigationbar", "navbar-default navbar-fixed-top")
+            +nav_item( "/", "home", "active" ) Home
+            +nav_item( "database-page", "database-page") Database
+            +nav_item( "authentication-page", "authentication-page" ) Authentication
+            +nav_item_dropdown( "#" )( label="Dropdown" )
+                +nav_item( "#" ) Action
+                +nav_item( "#" ) Another action
+                +nav_item( "#" ) Something else here
+                +nav_divider
+                +nav_header Nav header
+                +nav_item( "#" ) Separated link
+                +nav_item( "#" ) One more separated link
+
+    h1= title
+    p #{title}
+    br
+    div
+        button.btn.btn-primary#fileStore FileStore
+        button.btn.btn-primary#request Request
+        button.btn.btn-primary#session Session Status
+    br
+    div
+        button.btn.btn-info#designDoc Insert Design Doc
+        button.btn.btn-info#sessionView View Sessions
+    br
+    div
+        pre#displayArea

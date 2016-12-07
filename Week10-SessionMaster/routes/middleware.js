@@ -41,7 +41,6 @@ var sessionStore = sessionstore.createSessionStore({
 
 /***** End Couch Sessions ************************************************/
 
-
 router.use(session({
     genid: function(req) {
         'use strict';

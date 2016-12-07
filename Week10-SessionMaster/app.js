@@ -11,6 +11,10 @@ var index = require('./routes/index');
 var middleware = require('./routes/middleware');
 var users = require('./routes/users');
 var views = require('./routes/views');
+var passport = require('passport');
+var routes = require('./routes/index');
+var google = require('./routes/login-google');
+var twitter = require('./routes/login-twitter');
 
 var app = express();
 
@@ -19,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -28,10 +32,20 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(middleware);
 app.use('/', index);
 app.use('/users', users);
 app.use('/views', views);
+app.use('/auth', google);
+app.use('/twitter', twitter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
