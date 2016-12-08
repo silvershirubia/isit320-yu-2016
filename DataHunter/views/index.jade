@@ -1,0 +1,39 @@
+extends layout
+
+block content
+
+    div#blocker(style='display: -webkit-box;')
+        div#instructions(style='')
+            span(style='font-size:40px') Click to play
+            p (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+
+    div#message isit320_Yu
+        p
+            strong CameraX:
+                span#cameraX Foo
+        p
+            strong CameraZ:
+                span#cameraZ Foo
+        p
+            strong MazeX:
+                span#mazeX Foo
+        p
+            strong MazeZ:
+                span#mazeZ Foo
+        p
+            strong Maze Spaces left to Explore:
+                span#mazeEx 0
+        p
+            strong Maze Status:
+                span#mazeStatus Not Finished Exploring Yet
+        p
+            strong Target:
+                span#eliminate Suzie or Tom
+        p
+            strong Alive:
+                span#alive 0
+        p
+            strong Dead:
+                span#dead 0
+        strong Target Locations
+        ul#npcs
