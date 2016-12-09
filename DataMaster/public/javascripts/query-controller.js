@@ -8,24 +8,28 @@ define(['runQuery'], function(runQuery) {
         var $scope = $('#debug');
         var docs = $('#docs');
         var string = '';
+
         docs.empty();
+
         if (result.ok) {
             //YOUR CODE HERE PUTS INFO IN $scope AND/OR docs
-            $scope.html('It worked');
-            string = JSON.stringify(result.data, null, 4);
+            string = 'It worked';
+            if(result.data){
+                string += JSON.stringify(result.data, null, 4);
+            }
+            $scope.html(string);
+
         } else if (result.requestFailed) {
             //YOUR CODE HERE PUTS INFO IN $scope AND/OR docs
-            $scope.html('Database : ' + result.requestFailed.message);
-        } else if (result.error) {
-            //YOUR CODE HERE  PUTS INFO IN $scope AND/OR docs
-            $scope.html('Error');
+            $scope.html('Database : ' + JSON.stringify(result.requestFailed, null, 4));
+            docs.html(result.requestFailed.description);
         } else {
             //YOUR CODE HERE PUTS INFO IN $scope AND/OR docs
-            $scope.html(result);
+            $scope.html(JSON.stringify(result, null, 4));
         }
 
         //docs.html('Docs result: ' + JSON.stringify(result.data, null, 4));
-        docs.html(string); //YOUR CODE HERE PUTS INFO IN docs
+        docs.html(JSON.stringify(result.docs, null, 4)); //YOUR CODE HERE PUTS INFO IN docs
     };
 
     var home = '/home/ubuntu/Git/isit320-yu-2016/DataMaster/';

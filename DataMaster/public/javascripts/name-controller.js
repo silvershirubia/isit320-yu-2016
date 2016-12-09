@@ -16,6 +16,8 @@ define(['runQuery'], function(runQuery) {
             debug.html(data.currentDatabaseName);
         } else if (query === '/allDbs') {
             debug.html('here');
+        }else{
+            debug.html(JSON.stringify(data, null, 4));
         }
     };
 
