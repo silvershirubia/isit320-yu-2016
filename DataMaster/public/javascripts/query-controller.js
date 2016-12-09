@@ -43,7 +43,7 @@ define(['runQuery'], function(runQuery) {
     };
 
     queryController.npcsOneDoc = function($q) {
-        return runQuery('/insertFile?fileName=Npcs.json&id=oneDoc', $q);
+        return runQuery('/insertFile?fileName=' + home + 'Npcs.json&id=oneDoc', $q);
     };
 
     queryController.design = function($q) {
