@@ -28,6 +28,8 @@ define(['runQuery'], function(runQuery) {
         docs.html(string); //YOUR CODE HERE PUTS INFO IN docs
     };
 
+    var home = '/home/ubuntu/Git/isit320-yu-2016/DataMaster/';
+
     queryController.delete = function($q) {
         return runQuery('/deleteDb', $q);
     };
@@ -37,7 +39,7 @@ define(['runQuery'], function(runQuery) {
     };
 
     queryController.npcsBulk = function($q) {
-        return runQuery('/insertBulk?fileName=Npcs.json', $q);
+        return runQuery('/insertBulk?fileName=' + home + 'Npcs.json', $q);
     };
 
     queryController.npcsOneDoc = function($q) {
