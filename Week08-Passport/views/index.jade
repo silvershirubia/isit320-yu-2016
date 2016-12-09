@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  .panel.panel-default
+    .panel-heading Twitter
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/twitter/login') Log In with Twitter
+        li.list-group-item
+          a(href='/twitter/profile') Twitter Profile
+
+  .panel.panel-default
+    .panel-heading Google
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/auth/google') Log In Google
+        li.list-group-item
+          a(href='/auth/account') Google Account
+
+  div
+    a(href='/logout') Logout
+  br
+  button#status Status
+
+  div
+    pre#report

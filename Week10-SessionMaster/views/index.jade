@@ -1,0 +1,70 @@
+extends layout
+include mixins
+include mixin-nav
+include mixin-inputs
+
+block append content
+  +bootswatch('cerulean')
+  .header
+    +nav("Prog320 Midterm", "navigationbar", "navbar-default navbar-fixed-top")
+      +nav_item( "/", "home", "active" ) Home
+      +nav_item( "database-page", "database-page") Database
+      +nav_item( "authentication-page", "authentication-page" ) Authentication
+      +nav_item_dropdown( "#" )( label="Dropdown" )
+        +nav_item( "#" ) Action
+        +nav_item( "#" ) Another action
+        +nav_item( "#" ) Something else here
+        +nav_divider
+        +nav_header Nav header
+        +nav_item( "#" ) Separated link
+        +nav_item( "#" ) One more separated link
+
+  h1= title
+  p Welcome to #{title}
+  div
+    button.btn.btn-primary#page01 Page 1
+    button.btn.btn-primary#page02 Page 2
+    button.btn.btn-primary#page03 Page 3
+  br
+  div
+    button.btn.btn-primary#viewPage01 View Page01 Hits
+    button.btn.btn-primary#viewPage02 View Page02 Hits
+    button.btn.btn-primary#viewPage03 View Page03 Hits
+  br
+  div
+    button.btn.btn-primary#fileStore FileStore
+    button.btn.btn-primary#request Request
+    button.btn.btn-primary#session Session Status
+  br
+  div
+    button.btn.btn-info#designDoc Insert Design Doc
+    button.btn.btn-info#sessionView View Sessions
+  br
+  .panel.panel-default
+    .panel-heading Twitter
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/twitter/login') Log In with Twitter
+        li.list-group-item
+          a(href='/twitter/profile') Twitter Profile
+
+  .panel.panel-default
+    .panel-heading Google
+    .panel-body
+      ul.list-group
+        li.list-group-item
+          a(href='/auth/google') Log In Google
+        li.list-group-item
+          a(href='/auth/account') Google Account
+
+  div
+    a(href='/logout') Logout
+  br
+  button#status Status
+
+  div
+    pre#report
+  br
+  div
+    pre#displayArea

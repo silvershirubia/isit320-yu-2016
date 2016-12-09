@@ -89,7 +89,7 @@ function Weeks05To07 {
 }
 
 function Weeks08To09() {
-    check Week08-Facebook/
+    #check Week08-Facebook/
     #check Week08-Google/
     check Week08-Passport/
     check Week09-SessionBasics/

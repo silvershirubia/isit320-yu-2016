@@ -1,0 +1,32 @@
+extends layout
+include  mixins
+include mixin-radios
+include mixin-inputs
+
+block append content
+
+  .container
+    h1 #{pageTitle}
+    p You are in the <strong>#{programTitle}</strong> program. Select some controls and press the Go button.
+
+    +elfFormPanel("Main Form")#target
+
+      +elfRadioPanel("Radio Buttons")
+        +elfRadio("Radio1", "option1")
+        +elfRadio("Radio2", "option2")
+
+      +elfPanel("CheckBoxes")
+        +elfCheckBox("CheckBox 01", "checkBox01", "checkBox01")#checkBox01
+        +elfCheckBox("CheckBox 02", "checkBox02", "checkBox02")#checkBox02
+
+      +elfPanel("Input")
+        +elfInput("Enter a name", "subject", "Enter a subject")#subject.form-control
+
+      +elfPanel("Actions")
+        input.btn.btn-primary(type="submit", value="Go")
+
+    div
+      pre#formResults
+
+    div
+      pre#serverResults
