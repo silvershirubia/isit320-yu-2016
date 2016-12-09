@@ -11,7 +11,8 @@ var servers = ['http://127.0.0.1:5984', 'http://192.168.2.19:5984', 'http://192.
 var serverIndex = 0;
 var nano = require('nano')(servers[serverIndex]);
 
-var dbName = 'game_data_yu';
+//var dbName = 'game_data_yu';
+var dbName = 'couch-views-yu';
 var docName = 'phones';
 
 var insert = require('./CouchInsert')(router, nano, dbName);
